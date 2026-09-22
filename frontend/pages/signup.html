@@ -1,14 +1,111 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catch Hub - Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+    >
+
+    <title>Catch Hub - Signup</title>
 </head>
 
-<body>
-  <div id="app"></div>
+<body class="bg-[#2E2E2E]">
 
-  <script type="module" src="../src/main.ts"></script>
+<div id="app"></div>
+
+<main class="text-[#2DD6B7] min-h-screen flex justify-center">
+
+    <section class="lg:w-[444px] lg:h-8/10 w-[300px] h-5/10 mt-44 border border-[#2DD6B7] rounded-xl px-4 pt-4 pb-4">
+
+        <h1 class="font-[Genos] font-bold text-3xl mb-5">
+            Registreer
+        </h1>
+
+        <form class="font-[Genos] text-lg" action="" method="post">
+            <div class="flex gap-4 flex-row">
+                <div class="relative mb-4">
+
+                    <label for="Username" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Username:
+                    </label>
+
+                    <input class="w-[150px] lg:w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="Username" type="text" maxlength="30" name="Username" value="">
+
+                </div>
+
+                <div class="relative">
+                    <label for="Age" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Age:
+                    </label>
+
+                    <input class="w-[95px] lg:w-[115px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="Age" type="number" maxlength="2" name="Age" value="">
+                </div>
+            </div>
+
+
+            <div class="flex gap-6 mb-4 flex-col lg:flex-row">
+
+                <div class="relative">
+                    <label for="Email_adres" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Email adres:
+                    </label>
+
+                    <input class="lg:w-[350px] w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="Email_adres" type="text" maxlength="33" name="Email_adres" value="">
+                </div>
+
+            </div>
+
+            <div class="relative mb-4">
+
+                <label for="Password" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                    Password:
+                </label>
+
+                <input class="lg:w-[350px] w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                       id="Password" type="password" maxlength="33" name="Password" value="">
+
+            </div>
+
+
+            <div class="flex items-center gap-3 mt-2">
+
+                <button class="lg:h-11 h-15 px-3 rounded-xl border border-[#2DD6B7] bg-transparent text-[#2DD6B7] font-bold hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition"
+                        type="submit" name="submit">
+                    Confirm Signup
+                </button>
+
+
+                <div class="flex flex-col items-center">
+
+                    <span class="text-xs mb-1">
+                        Already have an account?
+                    </span>
+
+                    <a href="../index.html"
+                       class="h-8 w-[150px] px-8 flex items-center justify-center rounded-lg border border-[#2DD6B7] font-bold text-sm hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition">
+                        Go to login
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+<script type="module" src="../src/main.ts"></script>
+
 </body>
 </html>
