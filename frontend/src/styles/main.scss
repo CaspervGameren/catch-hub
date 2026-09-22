@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumar+One&display=swap');
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  background-color: #000000;
 }
 
 body {
@@ -10,5 +16,55 @@ h2 {
   font-size: 1.5rem;
   margin: 3vh 3vw 3vh 3vw;
   color: #2DD6B7;
-  font-family: Impact;
+  font-family: 'Kumar One', cursive;
+  text-align: center;
 }
+
+.cards {
+  display: flex;
+  gap: 5vw;
+  flex-wrap: wrap;
+  margin: 5vh 7vw 5vh 7vw;
+}
+
+.card {
+  background-color: #3A3A3A;
+  border: 2px solid #2DD6B7;
+  border-radius: 16px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-information {
+  display: flex;
+  gap: 2vh;
+  align-items: center
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #2DD6B7;
+  font-family: 'Kumar One', cursive;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-family: 'Kumar One', cursive;
+}
+
+.icon {
+  font-size: 1.1rem;
+}
+
+.card-description {
+  margin-left: 4vw;
+  margin-right: 4vw;
+  width: 80%;
+  color: rgb(140, 140, 140);
+}
+
+
