@@ -1,1 +1,42 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Kumar+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&family=Jaro:opsz@6..72&display=swap");
+
+@theme {
+  /* Font families */
+  --font-heading: "Kumar One", sans-serif;
+  --font-text: "Genos", sans-serif;
+  --font-number: "Jaro", sans-serif;
+
+  /* Text styling */
+  --breakpoint-2xl: 120;
+
+  /* Brand colors */
+  --color-brand: hsl(169 75% 43%);
+  --color-accent: hsl(169 67% 51%);
+  --color-complement: hsl(0 88% 47%);
+
+  /* Page colors */
+  --color-background: hsl(0 0% 18%);
+  --color-section: hsl(0 0% 23%);
+  --color-text-white: hsl(360, 100%, 100%);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button,
+  a {
+    font-family: var(--font-heading);
+  }
+
+  p,
+  li {
+    font-family: var(--font-text);
+  }
+}
