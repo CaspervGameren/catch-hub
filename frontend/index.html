@@ -1,14 +1,24 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catch Hub</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catch Hub</title>
+  </head>
 
-<body>
-  <div id="app"></div>
+  <body>
+    <h1 class="text-4xl font-bold">Catch Hub</h1>
 
-  <script type="module" src="/src/main.ts"></script>
-</body>
+    <p id="socket-status">Connecting...</p>
+
+    <button
+      id="share-location"
+      class="mt-4 rounded bg-blue-500 px-4 py-2 text-white">
+      Share my location
+    </button>
+
+    <p id="location" class="mt-4">No location shared yet.</p>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
