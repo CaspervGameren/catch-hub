@@ -10,9 +10,6 @@ const loginBtn = document.getElementById("loginBtn")!;
 const signUpSection = document.getElementById("signUpSection")!;
 const loginSection = document.getElementById("loginSection")!;
 
-const goToLogin = document.getElementById("goToLogin")!;
-const goToRegister = document.getElementById("goToRegister")!;
-
 function showRegister() {
     signUpSection.classList.remove("hidden");
     loginSection.classList.add("hidden");
@@ -38,7 +35,20 @@ function showLogin() {
 registerBtn.addEventListener("click", showRegister);
 loginBtn.addEventListener("click", showLogin);
 
-goToLogin.addEventListener("click", showLogin);
-goToRegister.addEventListener("click", showRegister);
-
 showRegister();
+
+const signupForm = document.getElementById("signupForm") as HTMLFormElement;
+
+signupForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(signupForm);
+
+    const response = await fetch("../backend/public/index.php", {
+        method: "POST",
+        body: formData
+    });
+
+    console.log("response:", response);
+
+});
