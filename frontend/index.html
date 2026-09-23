@@ -1,112 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catch Hub</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch Hub</title>
+</head>
 
-  <body class="bg-[#2f2f2f]">
-    <div class="flex min-h-screen items-center justify-center px-6 py-12">
-      <div class="flex flex-wrap items-center justify-center gap-6">
-        <button
-          type="button"
-          class="video-trigger flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#2DD6B7] bg-[#2f2f2f] text-3xl text-[#2DD6B7] shadow-[0_0_18px_rgba(45,214,183,0.35)] transition hover:scale-105"
-          data-video="https://www.w3schools.com/html/mov_bbb.mp4"
-          aria-label="Play video 1"
-        >
-          ▶
-        </button>
+<body>
+  <div id="app"></div>
 
-        <button
-          type="button"
-          class="video-trigger flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#2DD6B7] bg-[#2f2f2f] text-3xl text-[#2DD6B7] shadow-[0_0_18px_rgba(45,214,183,0.35)] transition hover:scale-105"
-          data-video="https://www.w3schools.com/html/movie.mp4"
-          aria-label="Play video 2"
-        >
-          ▶
-        </button>
-
-        <button
-          type="button"
-          class="video-trigger flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#2DD6B7] bg-[#2f2f2f] text-3xl text-[#2DD6B7] shadow-[0_0_18px_rgba(45,214,183,0.35)] transition hover:scale-105"
-          data-video="https://www.w3schools.com/html/mov_bbb.mp4"
-          aria-label="Play video 3"
-        >
-          ▶
-        </button>
-
-        <button
-          type="button"
-          class="video-trigger flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#2DD6B7] bg-[#2f2f2f] text-3xl text-[#2DD6B7] shadow-[0_0_18px_rgba(45,214,183,0.35)] transition hover:scale-105"
-          data-video="https://www.w3schools.com/html/movie.mp4"
-          aria-label="Play video 4"
-        >
-          ▶
-        </button>
-
-        <button
-          type="button"
-          class="video-trigger flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#2DD6B7] bg-[#2f2f2f] text-3xl text-[#2DD6B7] shadow-[0_0_18px_rgba(45,214,183,0.35)] transition hover:scale-105"
-          data-video="https://www.w3schools.com/html/mov_bbb.mp4"
-          aria-label="Play video 5"
-        >
-          ▶
-        </button>
-      </div>
-    </div>
-
-    <div id="videoModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 p-4">
-      <div class="relative w-full max-w-2xl rounded-2xl bg-[#1f1f1f] p-3 shadow-2xl">
-        <button
-          id="closeVideo"
-          type="button"
-          class="absolute -right-3 -top-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#2DD6B7] text-xl font-bold text-[#1f1f1f]"
-          aria-label="Close video"
-        >
-          ×
-        </button>
-
-        <div class="overflow-hidden rounded-xl">
-          <video id="videoPlayer" class="w-full rounded-xl" controls playsinline>
-            <source src="" type="video/mp4" />
-            Je browser ondersteunt geen video.
-          </video>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const videoButtons = document.querySelectorAll('.video-trigger');
-      const videoModal = document.getElementById('videoModal');
-      const closeVideo = document.getElementById('closeVideo');
-      const videoPlayer = document.getElementById('videoPlayer');
-
-      videoButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          const videoSource = button.getAttribute('data-video');
-          videoPlayer.src = videoSource;
-          videoPlayer.load();
-          videoModal.classList.remove('hidden');
-          videoModal.classList.add('flex');
-        });
-      });
-
-      closeVideo.addEventListener('click', function () {
-        videoPlayer.pause();
-        videoModal.classList.add('hidden');
-        videoModal.classList.remove('flex');
-      });
-
-      videoModal.addEventListener('click', function (event) {
-        if (event.target === videoModal) {
-          videoPlayer.pause();
-          videoModal.classList.add('hidden');
-          videoModal.classList.remove('flex');
-        }
-      });
-    </script>
-
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>
