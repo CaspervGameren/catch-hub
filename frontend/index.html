@@ -1,13 +1,115 @@
 <!doctype html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch Hub</title>
+  <link rel="stylesheet" href="src/styles/main.scss">
+</head>
+
+<body>
+    <section>
+
+        <nav>
+            <img src="public/assets/icon.svg" alt="logo placeholder">
+            <a href="pages/signup.html">Log in</a>
+        </nav>
+    </section>
+    <script type="module" src="src/main.ts"></script>
+</body>
+</html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catch Hub</title>
   </head>
 
+  <body class="bg-[#2f2f2f] font-sans text-cyan-400 antialiased">
+
+
+
+
   <body>
-    <div id="app"></div>
+    <header
+      class="hero flex flex-col justify-center items-center min-h-screen px-8 bg-neutral-950 text-white text-center"
+    >
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-400 text-xs font-medium tracking-wide"
+      >
+        <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+        JACHTSEIZOEN 2026 LIVE NOW
+      </div>
+
+      <h1
+        class="text-5xl md:text-7xl font-extrabold tracking-tight leading-none mb-6"
+      >
+        Hunt or be <br />
+        <span class="text-teal-400">Hunted.</span>
+      </h1>
+
+      <p
+        class="max-w-xl text-neutral-400 text-base md:text-lg mb-8 leading-relaxed"
+      >
+        Catch-Hub is a live GPS tag game for groups. Hunters track fugitives on
+        a real-time radar. Fugitives run, hide, and taunt. Sessions start in
+        seconds - you just need a code.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="/session"
+          class="px-6 py-3 rounded-lg bg-teal-400 hover:bg-teal-300 text-neutral-950 font-semibold transition flex items-center gap-2 shadow-lg shadow-teal-500/20"
+        >
+          <span>▶</span> START A SESSION
+        </a>
+        <a
+          href="/demo"
+          class="px-6 py-3 rounded-lg border border-teal-500/40 hover:border-teal-400 text-teal-400 font-medium transition flex items-center gap-2"
+        >
+          <span>𖣨</span> OPEN DEMO RADAR
+        </a>
+        <a
+          href="/profile"
+          class="px-6 py-3 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-medium transition"
+        >
+          CREATE ACCOUNT
+        </a>
+      </div>
+    </header>
+
+    <main class="flex items-center justify-center">
+      <section class="w-full max-w-xl rounded-2xl border border-[#2DD6B7] bg-[#3a3a3a] p-8 shadow-[0_0_0_1px_rgba(45,214,183,0.3)]">
+        <h2 class="mb-8 text-center text-5xl font-bold text-[#2DD6B7]">Contact</h1>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+          <input type="hidden" name="access_key" value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc" />
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Name</span>
+            <input type="text" name="name" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">E-mailadres</span>
+            <input type="email" name="email" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Type vraag</span>
+            <input type="text" name="subject" class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Add Message</span>
+            <textarea name="message" rows="5" required class="w-full rounded-[1.75rem] border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]"></textarea>
+          </label>
+
+          <button type="submit" class="mt-2 rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7]">
+            Send message
+          </button>
+        </form>
+      </section>
+    </main>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
