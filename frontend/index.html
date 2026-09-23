@@ -24,6 +24,60 @@
     <title>Catch Hub</title>
   </head>
 
+  <body class="bg-[#2f2f2f] font-sans text-cyan-400 antialiased">
+    <header class="border-b border-[#2DD6B7] bg-[#2f2f2f]">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-full bg-gradient-to-r from-[#2DD6B7] via-[#5fe3c8] to-[#1bb89e]"></div>
+        </div>
+
+        <nav class="hidden items-center gap-10 text-xl font-bold md:flex">
+          <a href="#" class="text-[#2DD6B7] hover:text-[#5fe3c8]">Home</a>
+          <a href="#" class="text-[#2DD6B7] hover:text-[#5fe3c8]">Map</a>
+          <a href="#" class="text-[#2DD6B7] hover:text-[#5fe3c8]">How it works</a>
+          <a href="#" class="text-[#2DD6B7] hover:text-[#5fe3c8]">Team</a>
+        </nav>
+
+        <button type="button" class="rounded-xl border border-[#2DD6B7] px-5 py-2 text-lg font-bold text-[#2DD6B7]">
+          SignUp/Login
+        </button>
+      </div>
+    </header>
+
+    <main class="flex min-h-[calc(100vh-80px)] items-center justify-center px-4 py-12">
+      <section class="w-full max-w-xl rounded-2xl border border-[#2DD6B7] bg-[#3a3a3a] p-8 shadow-[0_0_0_1px_rgba(45,214,183,0.3)]">
+        <h1 class="mb-8 text-center text-5xl font-bold text-[#2DD6B7]">Contact</h1>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+          <input type="hidden" name="access_key" value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc" />
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Name</span>
+            <input type="text" name="name" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">E-mailadres</span>
+            <input type="email" name="email" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Type vraag</span>
+            <input type="text" name="subject" class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Add Message</span>
+            <textarea name="message" rows="5" required class="w-full rounded-[1.75rem] border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]"></textarea>
+          </label>
+
+          <button type="submit" class="mt-2 rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7]">
+            Send message
+          </button>
+        </form>
+      </section>
+    </main>
+
   <body>
     <header
       class="hero flex flex-col justify-center items-center min-h-screen px-8 bg-neutral-950 text-white text-center"
