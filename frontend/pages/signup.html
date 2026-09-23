@@ -21,10 +21,25 @@
 
 <main class="text-[#2DD6B7] min-h-screen flex justify-center">
 
-    <section class="lg:w-[444px] lg:h-8/10 w-[300px] h-5/10 mt-44 border border-[#2DD6B7] rounded-xl px-4 pt-4 pb-4">
+    <div class="absolute top-[135px] left-51/100 -translate-x-1/2 w-[300px] lg:w-[444px] flex items-end">
+
+        <button id="registerBtn"
+                class="relative z-20 h-[40px] w-[100px] lg:w-[125px] border-2 border-b-0 border-[#2DD6B7] rounded-t-[24px] bg-[#2E2E2E] text-[#2DD6B7] font-[Genos] text-base text-left px-4 pb-0 hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition">
+            Register
+        </button>
+
+        <button id="loginBtn"
+                class="relative z-10 h-[40px] w-[100px] lg:w-[125px] -ml-[2px] border-2 border-b-0 border-[#2DD6B7] rounded-t-[24px] bg-[#2E2E2E] text-[#2DD6B7] font-[Genos] text-base text-left px-4 pb-0 hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition">
+            Login
+        </button>
+
+    </div>
+
+    <section id="signUpSection"
+             class="lg:w-[444px] lg:h-8/10 w-[300px] h-5/10 mt-44 border border-[#2DD6B7] rounded-xl px-4 pt-4 pb-4">
 
         <h1 class="font-[Genos] font-bold text-3xl mb-5">
-            Registreer
+            Register
         </h1>
 
         <form class="font-[Genos] text-lg" action="" method="post">
@@ -83,19 +98,51 @@
                     Confirm Signup
                 </button>
 
+            </div>
 
-                <div class="flex flex-col items-center">
+        </form>
 
-                    <span class="text-xs mb-1">
-                        Already have an account?
-                    </span>
+    </section>
 
-                    <a href="../index.html"
-                       class="h-8 w-[150px] px-8 flex items-center justify-center rounded-lg border border-[#2DD6B7] font-bold text-sm hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition">
-                        Go to login
-                    </a>
+    <section id="loginSection"
+             class="hidden lg:w-[444px] lg:h-8/10 w-[300px] h-5/10 mt-44 border border-[#2DD6B7] rounded-xl px-4 pt-4 pb-4">
+
+        <h1 class="font-[Genos] font-bold text-3xl mb-5">
+            Login
+        </h1>
+
+        <form class="font-[Genos] text-lg" action="" method="post">
+            <div class="flex gap-4 flex-row">
+                <div class="relative mb-4">
+
+                    <label for="Username" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Username:
+                    </label>
+
+                    <input class="w-[250px] lg:w-[350px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="Username" type="text" maxlength="30" name="Username" value="">
 
                 </div>
+            </div>
+
+            <div class="relative mb-4">
+
+                <label for="Password" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                    Password:
+                </label>
+
+                <input class="lg:w-[350px] w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                       id="Password" type="password" maxlength="33" name="Password" value="">
+
+            </div>
+
+
+            <div class="flex items-center gap-3 mt-2">
+
+                <button class="w-[120px] lg:w-[80] lg:h-11 h-15 px-3 rounded-xl border border-[#2DD6B7] bg-transparent text-[#2DD6B7] font-bold hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition"
+                        type="submit" name="submit">
+                    Login
+                </button>
 
             </div>
 
