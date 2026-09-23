@@ -8,14 +8,32 @@
 </head>
   <body class="bg-background font-sans antialiased">
 
+<nav
+  class="sticky top-0 z-50 flex items-center justify-center gap-8 border-b-2 px-6 py-3 backdrop-blur-sm"
+>
+  <a href="/" class="flex items-center justify-center">
+    <img
+      src="/assets/icon.svg"
+      alt="Catch Hub"
+      class="block h-14 w-auto"
+    >
+  </a>
 
-    <nav class="border-b-2 sticky top-0 backdrop-blur-sm">
-      <img src="/assets/icon.svg" alt="logo placeholder">
-      <a href="" class="text-brand">Log in</a>
-    </nav>
+<a
+  href="/login"
+  class="inline-flex items-center gap-2 rounded-lg border-2 border-accent bg-section px-4 py-2 text-2xl font-medium leading-none text-brand hover:text-section hover:bg-accent transition-colors transform"
+>
+  <iconify-icon
+    icon="mdi:radar"
+    class="block shrink-0 -translate-y-0.5 text-3xl"
+  ></iconify-icon>
+
+  <span class="leading-none">Login/Sign up</span>
+</a>
+</nav>
 
     <header
-      class="hero flex flex-col justify-center items-center min-h-screen text-text-white px-8 text-center"
+      class="hero flex flex-col justify-center items-center min-h-screen text-text-white text-center"
     >
       <div
         class="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full border border-teal-500/30 bg-teal-500/10 text-brand text-xs font-medium tracking-wide"
@@ -39,39 +57,41 @@
         seconds - you just need a code.
       </p>
 
-      <div class="flex flex-wrap gap-4">
-        <a
-          href="/session"
-          class="px-6 py-3 rounded-lg bg-brand hover:brightness-110 text-text-white font-semibold transition flex items-center gap-2 shadow-lg shadow-teal-500/20"
-        >
-          <iconify-icon
-            icon="mdi:clock-star-four-points-outline"
-            class="text-3xl"
-          >
+      <div class="flex flex-wrap items-center justify-center gap-4">
+  <a
+    href="/session"
+    class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 font-semibold text-text-white shadow-lg shadow-teal-500/20 transition hover:brightness-110"
+  >
+    <iconify-icon
+      icon="mdi:clock-star-four-points-outline"
+      class="block shrink-0 text-3xl -translate-y-0.5"
+    ></iconify-icon>
 
-          </iconify-icon>
-          START A SESSION
-        </a>
+    <span>START A SESSION</span>
+  </a>
         <a
-          href="/demo"
-          class="px-6 py-3 rounded-lg border border-teal-500/40 hover:border-brand text-brand font-medium transition flex items-center gap-2"
-        >
-            <iconify-icon
-            icon="mdi:radar"
-            class="text-3xl"
-          ></iconify-icon>
-           OPEN DEMO RADAR
-        </a>
-        <a
-          href="/profile"
-          class="px-6 py-3 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-medium transition"
-        >
-                <iconify-icon
-            icon="mdi:account-plus-outline"
-            class="text-3xl"
-          ></iconify-icon>
-          CREATE ACCOUNT
-        </a>
+    href="/demo"
+    class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-6 py-3 font-medium text-brand brightness-75 transition hover:border-brand hover:brightness-150"
+  >
+    <iconify-icon
+      icon="mdi:radar"
+      class="block shrink-0 text-3xl -translate-y-0.5"
+    ></iconify-icon>
+
+    <span>OPEN DEMO RADAR</span>
+  </a>
+
+  <a
+    href="/profile"
+    class="inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-800 px-6 py-3 font-medium text-neutral-300 transition hover:bg-neutral-700"
+  >
+    <iconify-icon
+      icon="mdi:account-plus-outline"
+      class="block shrink-0 text-3xl -translate-y-1"
+    ></iconify-icon>
+
+    <span>CREATE ACCOUNT</span>
+  </a>
       </div>
     </header>
 
