@@ -1,14 +1,119 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catch Hub - Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./css/style.css">
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+    >
+
+    <title>Catch Hub - Signup</title>
 </head>
 
-<body>
-  <div id="app"></div>
+<body class="bg-[#2E2E2E]">
 
-  <script type="module" src="../src/main.ts"></script>
+<div id="app"></div>
+
+<main class="text-[#2DD6B7] min-h-screen flex justify-center">
+
+    <section class="lg:w-[444px] lg:h-8/10 w-[300px] h-5/10 mt-44 border border-[#2DD6B7] rounded-xl px-4 pt-4 pb-4">
+
+        <h1 class="font-[Genos] font-bold text-3xl mb-5">
+            Registreer
+        </h1>
+
+        <form id="signup-form" class="font-[Genos] text-lg">
+            <div class="flex gap-4 flex-row">
+                <div class="relative mb-4">
+
+                    <label for="username" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Username:
+                    </label>
+
+                    <input class="w-[150px] lg:w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="username" type="text" maxlength="30" name="username">
+
+                    <p id="error-username" class="text-xs mt-1" style="color: #ef4444;"></p>
+                </div>
+
+                <div class="relative">
+                    <label for="age" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Age:
+                    </label>
+
+                    <input class="w-[95px] lg:w-[115px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="age" type="number" maxlength="2" name="age">
+
+                    <p id="error-age" class="text-xs mt-1" style="color: #ef4444;"></p>
+                </div>
+            </div>
+
+
+            <div class="flex gap-6 mb-4 flex-col lg:flex-row">
+
+                <div class="relative">
+                    <label for="email" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                        Email adres:
+                    </label>
+
+                    <input class="lg:w-[350px] w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                           id="email" type="text" maxlength="33" name="email">
+
+                    <p id="error-email" class="text-xs mt-1" style="color: #ef4444;"></p>
+                </div>
+
+            </div>
+
+            <div class="relative mb-4">
+
+                <label for="password" class="absolute -top-2 left-3 px-1 bg-[#2E2E2E] text-xs">
+                    Password:
+                </label>
+
+                <input class="lg:w-[350px] w-[250px] h-8 px-3 rounded-full border border-[#2DD6B7] bg-transparent outline-none"
+                       id="password" type="password" maxlength="33" name="password">
+
+                <p id="error-password" class="text-xs mt-1" style="color: #ef4444;"></p>
+
+            </div>
+
+
+            <div class="flex items-center gap-3 mt-2">
+
+                <button class="lg:h-11 h-15 px-3 rounded-xl border border-[#2DD6B7] bg-transparent text-[#2DD6B7] font-bold hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition"
+                        type="submit" name="submit">
+                    Confirm Signup
+                </button>
+
+
+                <div class="flex flex-col items-center">
+
+                    <span class="text-xs mb-1">
+                        Already have an account?
+                    </span>
+
+                    <a href="../index.html"
+                       class="h-8 w-[150px] px-8 flex items-center justify-center rounded-lg border border-[#2DD6B7] font-bold text-sm hover:bg-[#2DD6B7] hover:text-[#2E2E2E] transition">
+                        Go to login
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+<script type="module" src="../src/main.ts"></script>
+
 </body>
 </html>
