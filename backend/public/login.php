@@ -41,32 +41,28 @@ if (isset($_POST['submit'])) {
         $errors['password'] = 'Enter your password here';
     }
 
-    if (empty($errors)) {
+    $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
+    if ($user) {
+        if (password_verify($password, $user['password'])) {
 
-        $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
+            $_SESSION['email'] = $email;
+            $_SESSION['username'] = $user['username'];
+            $login = true;
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-
-                $_SESSION['email'] = $email;
-                $_SESSION['username'] = $user['username'];
-                $login = true;
-
-                header('');
-                exit;
-
-            } else {
-                $errors['login'] = 'Incorrect password';
-            }
+            header('');
+            exit;
 
         } else {
-            $errors['login'] = 'User not found';
+            $errors['login'] = 'Incorrect password';
         }
+
+    } else {
+        $errors['login'] = 'User not found';
     }
 }
 ?>

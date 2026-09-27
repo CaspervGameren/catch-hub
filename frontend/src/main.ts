@@ -51,29 +51,29 @@ import './styles/main.scss'
 //     });
 // }
 
-console.log("main.ts geladen");
+// form ophalen
 
 const form = document.querySelector<HTMLFormElement>('#signup-form');
 
 form?.addEventListener('submit', async (e) => {
-    console.log("formulier verstuurd");
-
     e.preventDefault();
 
-    // Oude errors verwijderen
     document.querySelectorAll('p[id^="error-"]')
         .forEach(p => p.textContent = '');
 
     const formData = new FormData(form);
 
+    // ophalen van de waarden uit de form
+
     const username = formData.get('username')?.toString().trim() ?? '';
     const age = formData.get('age')?.toString().trim() ?? '';
     const email = formData.get('email')?.toString().trim() ?? '';
-    const password = formData.get('password')?.toString() ?? '';
+    const password = formData.get('password')?.toString();
 
     let hasErrors = false;
 
-    // Username
+    // error voor username tonen bij lege string
+
     if (username === '') {
         const errorElement = document.querySelector('#error-username');
 
@@ -84,7 +84,8 @@ form?.addEventListener('submit', async (e) => {
         hasErrors = true;
     }
 
-    // Age
+    // error voor leeftijd tonen bij lege string
+
     if (age === '') {
         const errorElement = document.querySelector('#error-age');
 
@@ -94,6 +95,8 @@ form?.addEventListener('submit', async (e) => {
 
         hasErrors = true;
 
+        // error voor leeftijd tonen indien geen cijfer wordt gebruikt.
+
     } else if (!Number.isInteger(Number(age))) {
         const errorElement = document.querySelector('#error-age');
 
@@ -102,9 +105,10 @@ form?.addEventListener('submit', async (e) => {
         }
 
         hasErrors = true;
+
+        // error voor email tonen bij lege string
     }
 
-    // Email
     if (email === '') {
         const errorElement = document.querySelector('#error-email');
 
@@ -124,7 +128,6 @@ form?.addEventListener('submit', async (e) => {
         hasErrors = true;
     }
 
-    // Password
     if (password === '') {
         const errorElement = document.querySelector('#error-password');
 
@@ -135,9 +138,7 @@ form?.addEventListener('submit', async (e) => {
         hasErrors = true;
     }
 
-    // Niet naar PHP sturen als de frontend al fouten heeft
     if (hasErrors) {
-        console.log("Frontend validatie mislukt");
         return;
     }
 
@@ -147,8 +148,6 @@ form?.addEventListener('submit', async (e) => {
         email,
         password
     };
-
-    console.log("Data die naar PHP gaat:", dataToSend);
 
     try {
         const response = await fetch('/api/register.php', {
@@ -181,11 +180,6 @@ form?.addEventListener('submit', async (e) => {
         }
 
     } catch (error) {
-        console.error(
-            'Er is iets misgegaan:',
-            error
-        );
-
         const generalError =
             document.querySelector('#error-general');
 
