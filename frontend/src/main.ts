@@ -7,6 +7,7 @@ const contactCard = contactTrigger?.querySelector('[data-contact-card]')
 
 if (contactTrigger && contactCard && 'IntersectionObserver' in window) {
 	contactCard.classList.add('contact-reveal-pending')
+	contactCard.toggleAttribute('inert', true)
 
 	let lastScrollY = window.scrollY
 	let scrollDirection: 'up' | 'down' = 'down'
@@ -25,6 +26,7 @@ if (contactTrigger && contactCard && 'IntersectionObserver' in window) {
 			: scrollDirection === 'up'
 		contactCard.classList.toggle('contact-reveal-from-bottom', !openFromTop)
 		contactCard.classList.toggle('contact-reveal-visible', entry.isIntersecting)
+		contactCard.toggleAttribute('inert', !entry.isIntersecting)
 	}, { threshold: 0.12 })
 
 	contactObserver.observe(contactTrigger)
