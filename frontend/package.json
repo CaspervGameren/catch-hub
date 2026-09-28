@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.3.3",
     "sass": "^1.104.1",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "iconify-icon": "^3.0.3"
   }
 }
