@@ -5,7 +5,12 @@ import 'iconify-icon';
 const contactTrigger = document.querySelector('[data-contact-reveal]')
 const contactCard = contactTrigger?.querySelector('[data-contact-card]')
 
-if (contactTrigger && contactCard && 'IntersectionObserver' in window) {
+if (
+	contactTrigger &&
+	contactCard &&
+	'IntersectionObserver' in window &&
+	!window.matchMedia('(prefers-reduced-motion: reduce)').matches
+) {
 	contactCard.classList.add('contact-reveal-pending')
 	contactCard.toggleAttribute('inert', true)
 
