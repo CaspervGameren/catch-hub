@@ -96,13 +96,48 @@
       </div>
     </header>
 
-    <main class="flex items-center justify-center">
+    <main class="flex flex-col items-center gap-20 px-6 py-20">
+      <section id="team" aria-labelledby="team-title" class="grid w-full max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p class="mb-4 font-text text-sm uppercase text-brand">The crew / 2026</p>
+          <h2 id="team-title" class="mb-6 text-4xl font-bold text-[#2DD6B7] md:text-5xl">Meet the team</h2>
+          <p class="max-w-xl font-text text-xl leading-relaxed text-neutral-200">
+            We're Bertan, Max, Casper, Tuna, and Dave: a student team building Catch-Hub for a school project.
+          </p>
+          <p class="mt-4 max-w-xl font-text text-lg leading-relaxed text-neutral-400">
+            We love the mix of getting outside, thinking tactically, and bringing people together. Our goal is to turn a phone into the start of a real-life chase: hunters track fugitives on a live radar, and every session becomes its own adventure.
+          </p>
+        </div>
+
+        <ul aria-label="Catch-Hub team members" class="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+          <li class="border-t border-white/15 pt-4">
+            <span aria-hidden="true" class="mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">B</span>
+            <h3 class="font-heading text-lg text-text-white">Bertan</h3>
+          </li>
+          <li class="border-t border-white/15 pt-4">
+            <span aria-hidden="true" class="mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">M</span>
+            <h3 class="font-heading text-lg text-text-white">Max</h3>
+          </li>
+          <li class="border-t border-white/15 pt-4">
+            <span aria-hidden="true" class="mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">C</span>
+            <h3 class="font-heading text-lg text-text-white">Casper</h3>
+          </li>
+          <li class="border-t border-white/15 pt-4">
+            <span aria-hidden="true" class="mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">T</span>
+            <h3 class="font-heading text-lg text-text-white">Tuna</h3>
+          </li>
+          <li class="border-t border-white/15 pt-4">
+            <span aria-hidden="true" class="mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">D</span>
+            <h3 class="font-heading text-lg text-text-white">Dave</h3>
+          </li>
+        </ul>
+      </section>
+
       <section class="w-full max-w-xl rounded-2xl border border-[#2DD6B7] bg-[#3a3a3a] p-8 shadow-[0_0_0_1px_rgba(45,214,183,0.3)]">
         <h2 class="mb-8 text-center text-5xl font-bold text-[#2DD6B7]">Contact</h1>
 
         <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
           <input type="hidden" name="access_key" value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc" />
-
           <label class="block">
             <span class="mb-2 block text-xl text-[#2DD6B7]">Name</span>
             <input type="text" name="name" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
