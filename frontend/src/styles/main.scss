@@ -9,6 +9,33 @@ body {
   padding: 0;
 }
 
+.faq-item summary {
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary > span:first-child {
+  transition: color 240ms ease, text-shadow 240ms ease;
+}
+
+.faq-item[open] summary > span:first-child {
+  color: var(--color-brand);
+  text-shadow:
+    0 0 8px color-mix(in srgb, var(--color-brand) 70%, transparent),
+    0 0 18px color-mix(in srgb, var(--color-brand) 36%, transparent);
+}
+
+.faq-toggle {
+  transition: transform 200ms ease;
+}
+
+.faq-item[open] .faq-toggle {
+  transform: rotate(45deg);
+}
+
 nav {
   padding: 1rem;
   display: flex;
