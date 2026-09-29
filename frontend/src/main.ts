@@ -1,50 +1,47 @@
-import './styles/tailwind.css'
-import './styles/main.scss'
+import "./styles/tailwind.css";
+import "./styles/main.scss";
 
-import { io } from 'socket.io-client'
+import type { SessionResponse } from "./types";
+import { getElement, showGameUi, renderPlayers } from "./ui";
+import { socket, initSocketListeners, sendLocationUpdate } from "./socket";
+import { startGpsTracking } from "./location";
 
-const socket = io('http://localhost:3000')
+initSocketListeners();
 
-const status = document.querySelector<HTMLParagraphElement>('#socket-status')
+let userRole: "runner" | "hunter" = "runner";
 
-socket.on('connect', () => {
-  console.log('Socket connected:', socket.id)
+getElement("#join-form")?.addEventListener("submit", (e: SubmitEvent) => {
+  e.preventDefault();
 
-  if (status) {
-    status.textContent = `Connected: ${socket.id}`
-  }
-})
+  const submitter = (e.submitter ||
+    document.activeElement) as HTMLButtonElement | null;
+  userRole = (submitter?.dataset.role as "runner" | "hunter") || "runner";
 
-socket.on('disconnect', () => {
-  console.log('Socket disconnected')
+  const username =
+    getElement<HTMLInputElement>("#player-name")?.value.trim() || "";
+  const code =
+    getElement<HTMLInputElement>("#session-code")?.value.trim() || "";
 
-  if (status) {
-    status.textContent = 'Disconnected'
-  }
-})
+  if (!username || !code) return alert("Vul een naam en sessiecode in.");
 
-const locationButton =
-  document.querySelector<HTMLButtonElement>('#share-location')
+  socket.emit(
+    "joinSession",
+    { code, username, role: userRole },
+    (response: SessionResponse) => {
+      if (!response.success || !response.session) {
+        return alert(response.message);
+      }
 
-const locationText =
-  document.querySelector<HTMLParagraphElement>('#location')
+      showGameUi(username, userRole);
+      renderPlayers(response.session.players, socket.id);
 
-locationButton?.addEventListener('click', () => {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const latitude = position.coords.latitude
-      const longitude = position.coords.longitude
-
-      console.log('Latitude:', latitude)
-      console.log('Longitude:', longitude)
-
-      if (locationText) {
-        locationText.textContent =
-          `Lat: ${latitude}, Lng: ${longitude}`
+      if (userRole === "runner") {
+        startGpsTracking(sendLocationUpdate);
       }
     },
-    (error) => {
-      console.error('Could not get location:', error)
-    }
-  )
-})
+  );
+});
+
+getElement("#share-location")?.addEventListener("click", () => {
+  startGpsTracking(sendLocationUpdate);
+});
