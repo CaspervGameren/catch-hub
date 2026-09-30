@@ -9,22 +9,49 @@ body {
   padding: 0;
 }
 
-h1 {
-  font-family: "Kumar One";
+.contact-reveal-pending {
+  --contact-reveal-clip: inset(0 0 100%);
+  --contact-reveal-transform: translateY(-1rem) scaleY(0.96);
+  --contact-reveal-origin: top;
+  clip-path: var(--contact-reveal-clip);
+  opacity: 0;
+  transform: var(--contact-reveal-transform);
+  transform-origin: var(--contact-reveal-origin);
+  transition:
+    clip-path 950ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 650ms ease,
+    transform 950ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.contact-reveal-from-bottom {
+  --contact-reveal-clip: inset(100% 0 0);
+  --contact-reveal-transform: translateY(1rem) scaleY(0.96);
+  --contact-reveal-origin: bottom;
+}
+
+.contact-reveal-visible {
+  --contact-reveal-clip: inset(0);
+  --contact-reveal-transform: translateY(0) scaleY(1);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-reveal-pending {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 nav {
   padding: 1rem;
   display: flex;
-  background-color: #2e2e2e;
-  border: #2dd6b7 5px solid;
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
+
   img {
     height: 50px;
   }
-  color: #2dd6b7;
+  color: var(--color-accent);
   font-size: 2rem;
   display: flex;
   align-items: center;
