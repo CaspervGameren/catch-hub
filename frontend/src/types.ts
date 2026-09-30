@@ -30,6 +30,10 @@ export interface ToServer {
     data: { code: string; username: string; role: PlayerRole },
     callback: (response: SessionResponse) => void,
   ) => void;
+  checkSessionStatus: (
+    code: string,
+    callback: (status: { exists: boolean; hasHunter: boolean }) => void,
+  ) => void;
   updateLocation: (coords: { latitude: number; longitude: number }) => void;
 }
 

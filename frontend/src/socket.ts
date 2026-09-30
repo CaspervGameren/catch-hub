@@ -3,7 +3,6 @@ import type { ToClient, ToServer, Session } from "./types";
 import { updateStatus, renderPlayers, getElement } from "./ui";
 import { storeLatestRunnerLocation } from "./radar";
 
-// Relatieve paden gebruiken doordat Vite de /socket.io verzoeken proxiet
 export const socket: Socket<ToClient, ToServer> = io({
   transports: ["polling", "websocket"],
 });

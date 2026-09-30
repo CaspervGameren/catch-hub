@@ -23,6 +23,15 @@ const io = new Server<ToServer, ToClient>(httpServer, {
 io.on("connection", (socket) => {
   console.log(`Client verbonden via socket: ${socket.id}`);
 
+  socket.on("checkSessionStatus", (code, callback) => {
+    const session = getSession(code);
+    if (!session) {
+      return callback({ exists: false, hasHunter: false });
+    }
+    const hasHunter = session.players.some((p) => p.role === "hunter");
+    callback({ exists: true, hasHunter });
+  });
+
   socket.on("joinSession", ({ code, username, role }, callback) => {
     const session = getSession(code);
 
