@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { Server } from "socket.io";
-import { ToClient, ToServer } from "./types";
+import type { ToServer, ToClient } from "./types";
 import {
   getSession,
   isUsernameTaken,
@@ -11,14 +11,17 @@ import {
 
 const httpServer = createServer();
 
-const io = new Server<ToClient, ToServer>(httpServer, {
-  cors: { origin: "http://localhost:5173" },
-  pingTimeout: 5000,
-  pingInterval: 10000,
+const io = new Server<ToServer, ToClient>(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: false,
+  },
+  allowEIO3: true,
 });
 
 io.on("connection", (socket) => {
-  console.log(`Client verbonden: ${socket.id}`);
+  console.log(`Client verbonden via socket: ${socket.id}`);
 
   socket.on("joinSession", ({ code, username, role }, callback) => {
     const session = getSession(code);
@@ -54,9 +57,23 @@ io.on("connection", (socket) => {
 
   socket.on("updateLocation", (coords) => {
     updatePlayerLocation(socket.id, coords);
+
+    const session = getSession("CATCH123");
+    if (!session) return;
+
+    const player = session.players.find((p) => p.id === socket.id);
+
+    if (player && player.role === "runner") {
+      console.log(`[GPS] Runner ${player.username} stuurt locatie:`, coords);
+      io.to(session.code).emit("runnerLocationUpdate", {
+        runnerName: player.username,
+        location: coords,
+      });
+    }
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (reason) => {
+    console.log(`Client verbroken (${socket.id}). Reden: ${reason}`);
     const updates = removePlayerFromAllSessions(socket.id);
     updates.forEach(({ session }) => {
       io.to(session.code).emit("sessionUpdate", session);

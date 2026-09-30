@@ -1,4 +1,5 @@
 import type { Player } from "./types";
+import { initMap, refreshMapLayout } from "./map";
 
 export const getElement = <T extends HTMLElement>(selector: string) =>
   document.querySelector<T>(selector);
@@ -8,14 +9,29 @@ export function updateStatus(message: string) {
   if (status) status.textContent = message;
 }
 
-export function showGameUi(username: string, role: string) {
+export function showGameUi(username: string, role: "runner" | "hunter") {
   getElement("#join-section")?.classList.add("hidden");
   getElement("#game-ui")?.classList.remove("hidden");
 
   const roleDisplay = getElement("#role-display");
   if (roleDisplay) {
-    roleDisplay.textContent = `Welkom ${username} (${role === "runner" ? "Runner" : "Hunter"})`;
+    roleDisplay.textContent = `Welkom ${username} (${role === "runner" ? "Runner 🏃" : "Hunter 🎯"})`;
   }
+
+  const radarBox = getElement("#runner-radar-box");
+  const shareLocationBtn = getElement("#share-location");
+
+  if (role === "runner") {
+    radarBox?.classList.add("hidden");
+    shareLocationBtn?.classList.remove("hidden");
+  } else {
+    radarBox?.classList.remove("hidden");
+    shareLocationBtn?.classList.add("hidden");
+  }
+
+  // WAKKER MAKEN VAN DE KAART:
+  initMap();
+  refreshMapLayout();
 }
 
 export function renderPlayers(players: Player[], currentSocketId?: string) {
@@ -25,16 +41,16 @@ export function renderPlayers(players: Player[], currentSocketId?: string) {
   playersList.innerHTML = players
     .map((player) => {
       const isMe = player.id === currentSocketId;
-      const borderStyle = isMe
-        ? "border-gray-300 font-semibold"
-        : "border-gray-200";
+      const borderStyle = isMe ? "border-[#2DD6B7]" : "border-[#2DD6B7]/30";
 
       return `
-        <li class="flex items-center justify-between p-2.5 rounded border bg-gray-50 ${borderStyle}">
-          <span class="text-sm text-gray-800">
-            ${player.isHost ? "♛ " : ""}${player.username}
+        <li class="flex items-center justify-between p-3 rounded-xl border bg-black/20 ${borderStyle}">
+          <span class="text-sm font-semibold text-[#73e6d0]">
+            ${player.isHost ? "👑 " : ""}${player.username} ${isMe ? "(Jij)" : ""}
           </span>
-          <span class="rounded bg-gray-100 px-2 py-0.5 text-xs capitalize">${player.role}</span>
+          <span class="rounded-md bg-[#2DD6B7]/20 border border-[#2DD6B7]/40 px-2 py-0.5 text-xs font-bold text-[#2DD6B7] uppercase">
+            ${player.role}
+          </span>
         </li>
       `;
     })

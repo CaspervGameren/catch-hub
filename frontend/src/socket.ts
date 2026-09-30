@@ -1,9 +1,12 @@
 import { io, Socket } from "socket.io-client";
 import type { ToClient, ToServer, Session } from "./types";
 import { updateStatus, renderPlayers, getElement } from "./ui";
+import { storeLatestRunnerLocation } from "./radar";
 
-// ToServer EERST, daarna ToClient
-export const socket: Socket<ToServer, ToClient> = io("http://localhost:3000");
+// Relatieve paden gebruiken doordat Vite de /socket.io verzoeken proxiet
+export const socket: Socket<ToClient, ToServer> = io({
+  transports: ["polling", "websocket"],
+});
 
 export function initSocketListeners() {
   socket.on("connect", () => updateStatus("Verbonden met server"));
@@ -13,6 +16,11 @@ export function initSocketListeners() {
     const codeDisplay = getElement("#session-code-display");
     if (codeDisplay) codeDisplay.textContent = session.code;
     renderPlayers(session.players, socket.id);
+  });
+
+  socket.on("runnerLocationUpdate", (data) => {
+    console.log("[SOCKET] Runner locatie ontvangen:", data.location);
+    storeLatestRunnerLocation(data.location);
   });
 }
 
