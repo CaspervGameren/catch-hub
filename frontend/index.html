@@ -144,29 +144,30 @@
           <input type="hidden" name="access_key" value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc" />
           <label class="block">
             <span class="mb-2 block text-xl text-[#2DD6B7]">Name</span>
-            <input type="text" name="name" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+            <input type="text" name="name" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40" />
           </label>
 
           <label class="block">
             <span class="mb-2 block text-xl text-[#2DD6B7]">E-mailadres</span>
-            <input type="email" name="email" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+            <input type="email" name="email" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40" />
           </label>
 
           <label class="block">
-            <span class="mb-2 block text-xl text-[#2DD6B7]">Type vraag</span>
-            <input type="text" name="subject" class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]" />
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Type question</span>
+            <input type="text" name="subject" class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40" />
           </label>
 
           <label class="block">
             <span class="mb-2 block text-xl text-[#2DD6B7]">Add Message</span>
-            <textarea name="message" rows="5" required class="w-full rounded-[1.75rem] border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0]"></textarea>
+            <textarea name="message" rows="5" required class="w-full rounded-[1.75rem] border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"></textarea>
           </label>
 
-          <button type="submit" class="mt-2 rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7]">
+          <button type="submit" class="mt-2 rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7] transition duration-200 hover:border-accent hover:bg-brand/10 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand active:scale-[0.99]">
             Send message
           </button>
         </form>
       </section>
+      </div>
     </main>
 
     <script type="module" src="/src/main.ts"></script>
