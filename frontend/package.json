@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.3.3",
     "sass": "^1.105.0",
     "tailwindcss": "^4.3.3",
@@ -17,5 +18,6 @@
   },
   "dependencies": {
     "socket.io-client": "^4.8.3"
+    "iconify-icon": "^3.0.3"
   }
 }

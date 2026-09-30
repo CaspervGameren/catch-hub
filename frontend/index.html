@@ -96,6 +96,135 @@
           <ul id="players-list" class="mt-3 flex flex-col gap-2"></ul>
         </div>
       </section>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch Hub</title>
+  <link rel="stylesheet" href="src/styles/main.scss">
+  <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon">
+</head>
+  <body class="bg-background font-sans antialiased">
+
+<nav
+  class="sticky top-0 z-50 flex items-center justify-center gap-8 border-b-2 px-6 py-3 backdrop-blur-sm"
+>
+  <a href="/" class="flex items-center justify-center">
+    <img
+      src="/assets/icon.svg"
+      alt="Catch Hub"
+      class="block h-14 w-auto"
+    >
+  </a>
+
+<a
+  href="/signup/"
+  class="inline-flex items-center gap-2 rounded-lg border-2 border-accent bg-section px-4 py-2 text-2xl font-medium leading-none text-brand hover:text-section hover:bg-accent transition-colors transform"
+>
+  <iconify-icon
+    icon="mdi:account-plus-outline"
+    class="block shrink-0 -translate-y-1 text-3xl"
+  ></iconify-icon>
+
+  <span class="leading-none">Login/Sign up</span>
+</a>
+</nav>
+
+    <header
+  class="hero mx-auto flex min-h-[60dvh] w-full max-w-7xl flex-col items-center justify-center px-6 text-center text-text-white lg:items-start lg:text-left"
+>
+      <div
+        class="inline-flex items-center lg:items-start gap-2 px-3 py-1 mb-6 rounded-full border border-teal-500/30 bg-teal-500/10 text-brand text-xs font-medium tracking-wide"
+      >
+        <span class="w-2 h-2 lg:translate-y-1 rounded-full bg-brand"></span>
+        JACHTSEIZOEN 2026 LIVE NOW
+      </div>
+
+      <h1
+        class=" font-extrabold tracking-tight leading-none mb-6"
+      >
+        Hunt or be <br />
+        <span class="text-brand">Hunted.</span>
+      </h1>
+
+      <p
+        class="max-w-xl text-neutral-400 text-base md:text-lg mb-8 leading-relaxed"
+      >
+        Catch-Hub is a live GPS tag game for groups. Hunters track fugitives on
+        a real-time radar. Fugitives run, hide, and taunt. Sessions start in
+        seconds - you just need a code.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+  <a
+    href="/session"
+    class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 font-semibold text-text-white shadow-lg shadow-teal-500/20 transition hover:brightness-110"
+  >
+    <iconify-icon
+      icon="mdi:clock-star-four-points-outline"
+      class="block shrink-0 text-3xl -translate-y-0.5"
+    ></iconify-icon>
+
+    <span>START A SESSION</span>
+  </a>
+        <a
+    href="/demo"
+    class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-6 py-3 font-medium text-brand brightness-75 transition hover:border-brand hover:brightness-150"
+  >
+    <iconify-icon
+      icon="mdi:radar"
+      class="block shrink-0 text-3xl -translate-y-0.5"
+    ></iconify-icon>
+
+    <span>OPEN DEMO RADAR</span>
+  </a>
+
+  <a
+    href="/profile"
+    class="inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-800 px-6 py-3 font-medium text-neutral-300 transition hover:bg-neutral-700"
+  >
+    <iconify-icon
+      icon="mdi:account-plus-outline"
+      class="block shrink-0 text-3xl -translate-y-1"
+    ></iconify-icon>
+
+    <span>CREATE ACCOUNT</span>
+  </a>
+      </div>
+    </header>
+
+    <main class="flex items-center justify-center px-6 py-20">
+      <div data-contact-reveal class="w-full max-w-xl">
+      <section data-contact-card class="w-full rounded-2xl border border-[#2DD6B7] bg-[#3a3a3a] p-8 shadow-[0_0_0_1px_rgba(45,214,183,0.3)]">
+        <h2 class="mb-8 text-center text-5xl font-bold text-[#2DD6B7]">Contact</h2>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+          <input type="hidden" name="access_key" value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc" />
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Name</span>
+            <input type="text" name="name" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">E-mailadres</span>
+            <input type="email" name="email" required class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Type question</span>
+            <input type="text" name="subject" class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40" />
+          </label>
+
+          <label class="block">
+            <span class="mb-2 block text-xl text-[#2DD6B7]">Add Message</span>
+            <textarea name="message" rows="5" required class="w-full rounded-[1.75rem] border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none placeholder:text-[#73e6d0] transition focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"></textarea>
+          </label>
+
+          <button type="submit" class="mt-2 rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7] transition duration-200 hover:border-accent hover:bg-brand/10 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand active:scale-[0.99]">
+            Send message
+          </button>
+        </form>
+      </section>
+      </div>
     </main>
 
     <script type="module" src="/src/main.ts"></script>
