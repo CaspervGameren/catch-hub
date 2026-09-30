@@ -1,12 +1,44 @@
+[28-09-2026, 11:24:47] Casper: thnx [28-09-2026, 11:27:29] Vince van Apeldoorn:
 <!doctype html>
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catch-Hub - Game</title>
+
+    <!-- leaflet css -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+      /* hoogte en breedte */
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <script type="module" src="../src/main.ts"></script>
-    <script type="module" src="../src/game.ts"></script>
+    <div id="map"></div>
+
+    <!-- Leaflet inladen -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+      // [breedtegraad, lengtegraad] en zoom niveau is in dit geval 13
+      const map = L.map("map").setView([52.3676, 4.9041], 13);
+
+      // openstreetmap layer
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      // Marker met coordinaten
+      const marker = L.marker([52.3676, 4.9041]).addTo(map);
+      marker.bindPopup("<p>Dit is de locatie van de runner.</p>").openPopup();
+    </script>
   </body>
 </html>
