@@ -295,6 +295,8 @@
         </span>
       </a>
 
+      <div class="flex items-center gap-3 sm:gap-5">
+        <a href="#contact" class="font-heading text-xs sm:text-sm text-brand transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">CONTACT</a>
       <a
         href="/signup/"
         class="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-brand/60 bg-brand/10 px-5 py-2.5 font-heading text-sm font-bold tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.7)] active:scale-95"
@@ -308,11 +310,12 @@
         ></iconify-icon>
         <span>LOGIN</span>
       </a>
+      </div>
     </nav>
 
     <!-- HERO HEADER (Simplified & Cleaned: Badges Removed) -->
     <header
-      class="relative z-10 mx-auto flex flex-col items-center justify-center max-w-4xl px-6 pt-16 pb-12 text-center"
+      class="relative z-10 mx-auto flex flex-col items-center justify-center w-full max-w-7xl px-4 sm:px-6 pt-10 pb-12 text-center"
     >
       <h1
         class="fade-in-up font-heading mb-6 text-6xl sm:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tight text-white drop-shadow-2xl"
@@ -331,6 +334,14 @@
         Initiate your session. Track targets on live radar. Secure your
         perimeter.
       </p>
+      <section id="chase-videos" aria-labelledby="chase-videos-title" class="glass-card relative mt-8 text-left w-full scroll-mt-28 overflow-hidden rounded-2xl border border-brand/25 p-6 sm:p-10">
+        <p class="mb-3 font-mono text-xs uppercase tracking-widest text-brand">Rotterdam / Beurs</p>
+        <h2 id="chase-videos-title" class="mb-4 text-3xl font-bold text-white text-neon-cyan sm:text-4xl">The chase in action</h2>
+        <p class="mb-6 font-text text-lg text-gray-300">Follow the chase through Rotterdam. Tap a numbered spot to watch our team's footage.</p>
+        <div id="chase-video-map" role="region" aria-label="Team video spots around Beurs in Rotterdam"></div>
+        <p class="mt-4 font-mono text-xs text-gray-400">Explore the chase around Beurs · Team footage coming soon</p>
+      </section>
+
     </header>
 
     <!-- MAIN CONTENT CONTAINER (Expanded Card Widths: max-w-4xl / max-w-5xl) -->
@@ -464,6 +475,21 @@
 
           <!-- GAME UI (Active State) -->
           <section id="game-ui" class="hidden mt-4 space-y-6">
+            <div class="rounded-xl border border-brand/30 bg-black/30 p-4 space-y-3">
+              <p id="game-zone-summary" class="font-mono text-sm text-brand">Wachten op spelzone</p>
+              <button id="enable-zone-audio" type="button" class="rounded-lg border border-brand/50 px-4 py-2 text-sm text-brand">Alarmgeluid inschakelen</button>
+              <p id="zone-warning" role="alert" hidden class="rounded-lg border border-red-400 bg-red-950 p-4 font-mono text-red-100"></p>
+              <div id="host-zone-controls" hidden>
+                <h3 class="mb-2 text-brand">Kies de spelzone</h3>
+                <p class="mb-3 font-text text-gray-300">Klik op twee tegenoverliggende hoeken om een rechthoek te tekenen. Sla de zone op en start daarna het spel.</p>
+                <div id="zone-editor-map" aria-label="Kies twee hoeken van de spelzone"></div>
+                <div class="mt-3 flex flex-wrap gap-3">
+                  <button id="save-game-zone" type="button" disabled class="rounded-lg border border-brand px-4 py-2 text-brand disabled:opacity-40">Zone opslaan</button>
+                  <button id="start-zone-game" type="button" disabled class="rounded-lg bg-brand px-4 py-2 text-black disabled:opacity-40">Spel starten</button>
+                </div>
+                <p id="zone-editor-status" role="status" class="mt-2 font-text text-gray-300"></p>
+              </div>
+            </div>
             <div
               class="rounded-xl bg-brand/10 border border-brand/30 p-4 text-center backdrop-blur-md"
             >
@@ -607,149 +633,6 @@
         </section>
       </div>
 
-      <!-- CONTACT FORM CARD (Matching Wider Width & Grid Form) -->
-      <div data-contact-reveal class="fade-in-up delay-300 w-full">
-        <section
-          data-contact-card
-          class="glass-card group relative w-full rounded-2xl p-6 sm:p-10 relative overflow-hidden"
-        >
-          <!-- Cyber Corner Accent Markers -->
-          <div
-            class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"
-          ></div>
-          <div
-            class="absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-brand"
-          ></div>
-          <div
-            class="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-brand"
-          ></div>
-          <div
-            class="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-brand"
-          ></div>
-
-          <header
-            class="mb-10 flex flex-col items-center border-b border-brand/20 pb-6"
-          >
-            <h2
-              class="font-heading text-3xl sm:text-4xl uppercase tracking-widest text-white text-neon-cyan font-black"
-            >
-              Comms Channel
-            </h2>
-            <p
-              class="mt-2 font-mono text-xs uppercase tracking-widest text-brand/80"
-            >
-              Secure Transmission Link
-            </p>
-          </header>
-
-          <form
-            action="https://api.web3forms.com/submit"
-            method="POST"
-            class="space-y-6"
-          >
-            <input
-              type="hidden"
-              name="access_key"
-              value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc"
-            />
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <label class="block group/input">
-                <span
-                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
-                >
-                  Name
-                </span>
-                <div class="relative">
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    placeholder="Enter Name"
-                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
-                  />
-                  <div
-                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
-                  ></div>
-                </div>
-              </label>
-
-              <label class="block group/input">
-                <span
-                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
-                >
-                  Email
-                </span>
-                <div class="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="Enter Email"
-                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
-                  />
-                  <div
-                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
-                  ></div>
-                </div>
-              </label>
-            </div>
-
-            <label class="block group/input">
-              <span
-                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
-              >
-                Subject
-              </span>
-              <div class="relative">
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Enter Subject"
-                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
-                />
-                <div
-                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
-                ></div>
-              </div>
-            </label>
-
-            <label class="block group/input">
-              <span
-                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
-              >
-                Message
-              </span>
-              <div class="relative">
-                <textarea
-                  name="message"
-                  rows="4"
-                  required
-                  placeholder="Enter Data..."
-                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
-                ></textarea>
-                <div
-                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
-                ></div>
-              </div>
-            </label>
-
-            <button
-              type="submit"
-              class="relative w-full overflow-hidden rounded-lg border border-brand bg-brand/20 py-4 font-heading font-bold text-lg tracking-wider text-white transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_30px_rgba(45,214,183,0.7)] active:scale-95 flex items-center justify-center gap-2"
-            >
-              <span
-                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
-              ></span>
-              <iconify-icon
-                icon="mdi:send-lock-outline"
-                class="text-xl"
-              ></iconify-icon>
-              <span>SEND</span>
-            </button>
-          </form>
-        </section>
-      </div>
       <section id="team" aria-labelledby="team-title" class="grid w-full max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p class="mb-4 font-text text-sm uppercase text-brand">The crew / 2026</p>
@@ -837,6 +720,152 @@
           </details>
         </div>
       </section>
+      <!-- CONTACT -->
+      <div class="w-full">
+        <section
+          id="contact"
+          aria-labelledby="contact-title"
+          class="glass-card group relative w-full scroll-mt-28 rounded-2xl p-6 sm:p-10 overflow-hidden"
+        >
+          <!-- Cyber Corner Accent Markers -->
+          <div
+            class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"
+          ></div>
+          <div
+            class="absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-brand"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-brand"
+          ></div>
+          <div
+            class="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-brand"
+          ></div>
+
+          <header
+            class="mb-10 flex flex-col items-center border-b border-brand/20 pb-6"
+          >
+            <h2 id="contact-title"
+              class="font-heading text-3xl sm:text-4xl uppercase tracking-widest text-white text-neon-cyan font-black"
+            >
+              Contact
+            </h2>
+            <p
+              class="mt-2 font-mono text-xs uppercase tracking-widest text-brand/80"
+            >
+              Have a question? Send us a message.
+            </p>
+          </header>
+
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            class="space-y-6"
+          >
+            <input
+              type="hidden"
+              name="access_key"
+              value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc"
+            />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <label class="block group/input">
+                <span
+                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+                >
+                  Name
+                </span>
+                <div class="relative">
+                  <input
+                    type="text"
+                    name="name"
+                    autocomplete="name"
+                    required
+                    placeholder="Enter Name"
+                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                  />
+                  <div
+                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                  ></div>
+                </div>
+              </label>
+
+              <label class="block group/input">
+                <span
+                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+                >
+                  Email
+                </span>
+                <div class="relative">
+                  <input
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                    placeholder="Enter Email"
+                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                  />
+                  <div
+                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                  ></div>
+                </div>
+              </label>
+            </div>
+
+            <label class="block group/input">
+              <span
+                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+              >
+                Subject
+              </span>
+              <div class="relative">
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Enter Subject"
+                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                />
+                <div
+                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                ></div>
+              </div>
+            </label>
+
+            <label class="block group/input">
+              <span
+                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+              >
+                Message
+              </span>
+              <div class="relative">
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Write your message..."
+                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                ></textarea>
+                <div
+                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                ></div>
+              </div>
+            </label>
+
+            <button
+              type="submit"
+              class="relative w-full overflow-hidden rounded-lg border border-brand bg-brand/20 py-4 font-heading font-bold text-lg tracking-wider text-white transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_30px_rgba(45,214,183,0.7)] active:scale-95 flex items-center justify-center gap-2"
+            >
+              <span
+                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
+              ></span>
+              <iconify-icon
+                icon="mdi:send-lock-outline"
+                class="text-xl"
+              ></iconify-icon>
+              <span>SEND MESSAGE</span>
+            </button>
+          </form>
+        </section>
+      </div>
     </main>
 
     <!-- FOOTER -->

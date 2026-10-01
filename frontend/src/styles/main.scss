@@ -164,3 +164,41 @@ footer {
   border-color: rgba(45, 214, 183, 0.95);
   justify-content: space-evenly;
 }
+
+#chase-video-map {
+  height: clamp(420px, 65vh, 620px);
+  width: 100%;
+  z-index: 0;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(45, 214, 183, 0.3);
+  background: #0a111c;
+}
+
+.chase-video-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a111c;
+  border: 1px solid #2dd6b7;
+  border-radius: 0.5rem;
+  color: #2dd6b7;
+  box-shadow: 0 0 16px rgba(45, 214, 183, 0.4);
+  font: bold 13px monospace;
+}
+
+.chase-video-leaflet-popup {
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #0a111c;
+    color: #e5e7eb;
+  }
+  .leaflet-popup-close-button { color: #2dd6b7; }
+}
+
+.chase-video-popup {
+  width: min(280px, 65vw);
+  h3 { font: bold 16px sans-serif; color: #2dd6b7; margin: 0 0 12px; }
+  video { display: block; width: 100%; max-height: 240px; border-radius: 8px; background: #000; }
+  .chase-video-placeholder { padding: 35px 16px; text-align: center; border: 1px dashed #2dd6b7; border-radius: 8px; }
+}
+
+#zone-editor-map { height: 320px; width: 100%; border-radius: 12px; z-index: 0; }

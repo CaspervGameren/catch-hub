@@ -1,0 +1,1 @@
+Add team MP4 or WebM clips here. In frontend/src/chaseVideos.ts set each spot’s src to e.g. "/videos/beurs.mp4". Keep src empty to show the coming-soon placeholder. Coordinates are illustrative and can be changed per clip. Videos play only when visitors press play.
