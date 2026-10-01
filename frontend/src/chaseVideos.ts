@@ -21,7 +21,22 @@ export function initChaseVideos() {
   const container = document.getElementById("chase-video-map");
   if (!container) return;
 
-  const map = L.map(container, { scrollWheelZoom: false }).setView([51.9185, 4.4803], 16);
+  const filmingArea = L.latLngBounds([51.9115, 4.4600], [51.9260, 4.5000]);
+  const map = L.map(container, {
+    scrollWheelZoom: false,
+    maxBounds: filmingArea,
+    maxBoundsViscosity: 1,
+    maxZoom: 19,
+  }).setView([51.9185, 4.4803], 16);
+
+  // Prevent zooming out far enough to expose places outside the filming area.
+  const constrainViewport = () => {
+    const minimumZoom = Math.ceil(map.getBoundsZoom(filmingArea, true));
+    map.setMinZoom(minimumZoom);
+    if (map.getZoom() < minimumZoom) map.setZoom(minimumZoom, { animate: false });
+    map.panInsideBounds(filmingArea, { animate: false });
+  };
+  map.on("resize", constrainViewport);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -69,4 +84,5 @@ export function initChaseVideos() {
   });
 
   map.fitBounds(L.latLngBounds(chaseVideos.map((spot) => spot.coordinates)), { padding: [45, 45], maxZoom: 16 });
+  constrainViewport();
 }
