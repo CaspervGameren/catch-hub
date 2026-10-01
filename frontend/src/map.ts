@@ -65,7 +65,8 @@ export function updateMapMarker(
 }
 
 export function showZone(zone: GameZone | undefined) {
-  if (!zone || !map) return;
+  if (!map) return;
+  if (!zone) { zoneLayer?.remove(); zoneLayer = undefined; activeZone = undefined; return; }
   if (activeZone && JSON.stringify(activeZone) === JSON.stringify(zone)) return;
   activeZone = zone;
   zoneLayer?.remove();

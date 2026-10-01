@@ -17,7 +17,7 @@ function event(s,name){return new Promise((r,j)=>{const t=setTimeout(()=>j(Error
 try {
  await ready;
  const code='TEST-'+Date.now();
- const host=await connect(),runner=await connect(),other=await connect();
+ const host=await connect(),other=await connect();let runner=await connect();
  assert.equal((await emit(host,'joinSession',{code,username:'host',role:'hunter'})).success,true);
  assert.equal((await emit(runner,'joinSession',{code,username:'runner',role:'runner'})).success,true);
  assert.equal((await emit(other,'joinSession',{code:code+'B',username:'other',role:'hunter'})).success,true);
@@ -29,6 +29,12 @@ try {
  assert.equal((await emit(host,'setGameZone',zone)).success,false);
  let pending=event(runner,'zoneStatus');runner.emit('updateLocation',{latitude:51.94,longitude:4.48});let status=await pending;
  assert.equal(status.outside,true);assert.equal(status.deadline-status.serverNow,10000);
+ const originalDeadline=status.deadline;
+ runner.disconnect();await new Promise(r=>setTimeout(r,150));runner=await connect();
+ const resumed=await emit(runner,'joinSession',{code,username:'runner',role:'runner'});
+ assert.equal(resumed.success,true);
+ const resumedStatus=resumed.session.players.find(p=>p.username==='runner').zoneStatus;
+ assert.equal(resumedStatus.deadline,originalDeadline);assert.ok(resumedStatus.serverNow>status.serverNow);
  pending=event(runner,'zoneStatus');runner.emit('updateLocation',{latitude:51.92,longitude:4.48});status=await pending;assert.equal(status.outside,false);
  pending=event(runner,'zoneStatus');runner.emit('updateLocation',{latitude:51.94,longitude:4.48});status=await pending;
  const disconnected=await connect();

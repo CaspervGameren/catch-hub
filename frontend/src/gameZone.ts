@@ -115,6 +115,7 @@ export function renderGameZone(session: Session) {
       message("Zone getekend. Klik op Zone opslaan of kies opnieuw twee hoeken.");
     });
   }
+  if (!session.zone && !draft && !firstCorner) { rectangle?.remove(); rectangle = undefined; }
   if (session.zone && !draft && !firstCorner) {
     const bounds = L.latLngBounds([session.zone.south, session.zone.west], [session.zone.north, session.zone.east]);
     rectangle?.remove();

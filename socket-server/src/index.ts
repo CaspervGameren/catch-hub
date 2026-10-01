@@ -60,7 +60,10 @@ io.on("connection", (socket) => {
     socket.join(session.code);
     const newPlayer = addPlayer(session, socket.id, username, role);
     const name = newPlayer.username.toLowerCase();
-    if (session.zoneWarnings && Object.hasOwn(session.zoneWarnings, name)) newPlayer.zoneStatus = session.zoneWarnings[name];
+    if (session.zoneWarnings && Object.hasOwn(session.zoneWarnings, name)) {
+      newPlayer.zoneStatus = session.zoneWarnings[name];
+      newPlayer.zoneStatus.serverNow = Date.now();
+    }
 
     callback({
       success: true,
