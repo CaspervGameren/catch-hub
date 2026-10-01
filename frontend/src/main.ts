@@ -1,3 +1,4 @@
+import { initChaseVideos } from "./chaseVideos";
 import "./styles/tailwind.css";
 import "./styles/main.scss";
 
@@ -14,6 +15,7 @@ import {
 } from "./radar";
 
 initSocketListeners();
+initChaseVideos();
 
 let userRole: "runner" | "hunter" = "runner";
 
