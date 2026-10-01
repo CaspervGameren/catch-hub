@@ -15,334 +15,263 @@
     />
   </head>
 
-  <body class="bg-background font-sans antialiased">
+  <body class="bg-[#090e14] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0d1f22] via-[#090e14] to-black font-sans antialiased text-gray-200 min-h-screen selection:bg-brand selection:text-black overflow-x-hidden">
+    
+    <!-- DYNAMIC BACKGROUND -->
+    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <!-- Animated Grid -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#2DD6B710_1px,transparent_1px),linear-gradient(to_bottom,#2DD6B710_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] animate-[scrollGrid_20s_linear_infinite]"></div>
+      
+      <!-- Floating Glowing Orbs -->
+      <div class="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-brand/10 blur-[100px] animate-[floatOrb_12s_ease-in-out_infinite]"></div>
+      <div class="absolute top-1/2 right-10 h-[300px] w-[300px] rounded-full bg-brand/5 blur-[80px] animate-[floatOrb_15s_ease-in-out_infinite_reverse]"></div>
+      <div class="absolute -bottom-40 left-1/3 h-[400px] w-[400px] rounded-full bg-[#185b54]/20 blur-[120px] animate-[floatOrb_18s_ease-in-out_infinite]"></div>
+    </div>
+
     <!-- NAVIGATIE -->
-    <nav
-      class="sticky top-0 z-50 flex items-center justify-center gap-8 border-b-2 px-6 py-3 backdrop-blur-sm"
-    >
-      <a href="/" class="flex items-center justify-center">
-        <img src="/assets/icon.svg" alt="Catch Hub" class="block h-14 w-auto" />
+    <nav class="sticky top-0 z-50 flex items-center justify-between border-b border-brand/20 bg-[#090e14]/70 px-8 py-4 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="relative">
+          <div class="absolute inset-0 rounded-full bg-brand blur-md opacity-40 group-hover:opacity-80 transition duration-500"></div>
+          <img src="/assets/icon.svg" alt="Catch Hub" class="relative z-10 block h-10 w-auto" />
+        </div>
+        <span class="font-heading text-2xl tracking-widest text-white uppercase drop-shadow-[0_0_8px_rgba(45,214,183,0.8)]">Catch<span class="text-brand">Hub</span></span>
       </a>
 
-      <a
-        href="/signup/"
-        class="inline-flex items-center gap-2 rounded-lg border-2 border-accent bg-section px-4 py-2 text-2xl font-medium leading-none text-brand transition-colors hover:bg-accent hover:text-section"
-      >
-        <iconify-icon
-          icon="mdi:account-plus-outline"
-          class="block shrink-0 -translate-y-1 text-3xl"
-        ></iconify-icon>
-        <span class="leading-none">Login/Sign up</span>
+      <a href="/signup/" class="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-brand/50 bg-brand/10 px-6 py-2 font-heading tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.6)]">
+        <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></span>
+        <iconify-icon icon="mdi:account-plus-outline" class="text-xl"></iconify-icon>
+        <span>LOGIN</span>
       </a>
     </nav>
 
     <!-- HERO HEADER -->
-    <header
-      class="hero mx-auto flex min-h-[60dvh] w-full max-w-7xl flex-col items-center justify-center px-6 text-center text-text-white lg:items-start lg:text-left"
-    >
-      <div
-        class="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-medium tracking-wide text-brand lg:items-start"
-      >
-        <span class="h-2 w-2 rounded-full bg-brand lg:translate-y-1"></span>
-        JACHTSEIZOEN 2026 LIVE NOW
+    <header class="relative z-10 mx-auto flex min-h-[50dvh] w-full max-w-6xl flex-col items-center justify-center px-6 pt-12 text-center">
+      <div class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-sm border border-brand/40 bg-brand/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-brand shadow-[0_0_10px_rgba(45,214,183,0.1)]">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-brand"></span>
+        </span>
+        SYSTEM_ONLINE // SEASON 2026
       </div>
 
-      <h1 class="mb-6 font-extrabold leading-none tracking-tight">
+      <h1 class="font-heading mb-6 text-5xl md:text-7xl font-black uppercase leading-none tracking-tighter text-white drop-shadow-lg">
         Hunt or be <br />
-        <span class="text-brand">Hunted.</span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-teal-200 drop-shadow-[0_0_15px_rgba(45,214,183,0.5)]">Hunted</span>
       </h1>
 
-      <p
-        class="mb-8 max-w-xl text-base leading-relaxed text-neutral-400 md:text-lg"
-      >
-        Catch-Hub is a live GPS tag game for groups. Hunters track fugitives on
-        a real-time radar. Fugitives run, hide, and taunt. Sessions start in
-        seconds - you just need a code.
+      <p class="mb-10 max-w-2xl text-lg font-light leading-relaxed text-gray-400">
+        Initiate your session. Track targets on live radar. Secure your perimeter.
       </p>
-
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <a
-          href="/session"
-          class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 font-semibold text-text-white shadow-lg shadow-teal-500/20 transition hover:brightness-110"
-        >
-          <iconify-icon
-            icon="mdi:clock-star-four-points-outline"
-            class="block shrink-0 -translate-y-0.5 text-3xl"
-          ></iconify-icon>
-          <span>START A SESSION</span>
-        </a>
-
-        <a
-          href="/demo"
-          class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-6 py-3 font-medium text-brand brightness-75 transition hover:border-brand hover:brightness-150"
-        >
-          <iconify-icon
-            icon="mdi:radar"
-            class="block shrink-0 -translate-y-0.5 text-3xl"
-          ></iconify-icon>
-          <span>OPEN DEMO RADAR</span>
-        </a>
-
-        <a
-          href="/profile"
-          class="inline-flex items-center justify-center gap-2 rounded-lg bg-neutral-800 px-6 py-3 font-medium text-neutral-300 transition hover:bg-neutral-700"
-        >
-          <iconify-icon
-            icon="mdi:account-plus-outline"
-            class="block shrink-0 -translate-y-1 text-3xl"
-          ></iconify-icon>
-          <span>CREATE ACCOUNT</span>
-        </a>
-      </div>
     </header>
 
     <!-- MAIN CONTENT -->
-    <main class="flex flex-col items-center justify-center gap-16 px-6 py-20">
-      <!-- FORMULIER VOOR DEELNAME & GAME UI (AANGEPAST NAAR HETZELFDE THEMA) -->
-      <div class="w-full max-w-xl">
-        <section
-          class="w-full rounded-2xl border border-[#2DD6B7] bg-[#3a3a3a] p-8 shadow-[0_0_0_1px_rgba(45,214,183,0.3)]"
-        >
-          <header class="mb-8 text-center">
-            <h2 class="text-5xl font-bold text-[#2DD6B7]">Join</h2>
-            <p id="socket-status" class="mt-2 text-sm text-[#73e6d0]">
-              Verbinden...
-            </p>
+    <main class="relative z-10 flex flex-col items-center justify-center gap-16 px-6 pb-24">
+      
+      <!-- GAME UI PANEL -->
+      <div class="w-full max-w-2xl">
+        <section class="group relative w-full overflow-hidden rounded-xl border border-brand/30 bg-[#11181f]/80 p-8 backdrop-blur-xl shadow-[0_0_30px_rgba(45,214,183,0.1)] transition-all hover:border-brand/60 hover:shadow-[0_0_40px_rgba(45,214,183,0.15)]">
+          
+          <!-- Decorative Corners -->
+          <div class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"></div>
+          <div class="absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-brand"></div>
+          <div class="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-brand"></div>
+          <div class="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-brand"></div>
+
+          <header class="mb-10 flex flex-col items-center border-b border-white/10 pb-6">
+            <h2 class="font-heading text-4xl uppercase tracking-widest text-brand drop-shadow-[0_0_10px_rgba(45,214,183,0.4)]">Lobby Uplink</h2>
+            <div class="mt-3 flex items-center gap-2">
+              <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand"></span>
+              <p id="socket-status" class="font-mono text-xs uppercase tracking-widest text-brand/80">Establishing connection...</p>
+            </div>
           </header>
 
-          <!-- FORMULIER VOOR DEELNAME -->
+          <!-- FORMULIER -->
           <section id="join-section">
-            <form id="join-form" class="space-y-6">
-              <label class="block">
-                <span class="mb-2 block text-xl text-[#2DD6B7]">Naam</span>
-                <input
-                  type="text"
-                  id="player-name"
-                  name="playerName"
-                  required
-                  placeholder="Bijv. Vince"
-                  class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none transition placeholder:text-[#73e6d0]/60 focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"
-                />
-              </label>
+            <form id="join-form" class="space-y-8">
+              <div class="space-y-5">
+                <label class="block group/input">
+                  <span class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors">Callsign (Name)</span>
+                  <div class="relative">
+                    <input type="text" id="player-name" name="playerName" required placeholder="Enter CallSign" class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]" />
+                    <div class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"></div>
+                  </div>
+                </label>
 
-              <label class="block">
-                <span class="mb-2 block text-xl text-[#2DD6B7]"
-                  >Sessie code</span
-                >
-                <input
-                  type="text"
-                  id="session-code"
-                  name="sessionCode"
-                  required
-                  value="CATCH123"
-                  placeholder="Bijv. CATCH123"
-                  class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 uppercase text-[#2DD6B7] outline-none transition placeholder:text-[#73e6d0]/60 focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"
-                />
-              </label>
+                <label class="block group/input">
+                  <span class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors">Session ID</span>
+                  <div class="relative">
+                    <input type="text" id="session-code" name="sessionCode" required value="CATCH123" placeholder="XXXXXX" class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white uppercase outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]" />
+                    <div class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"></div>
+                  </div>
+                </label>
+              </div>
 
-              <fieldset class="block">
-                <legend class="mb-2 text-xl text-[#2DD6B7]">Kies je rol</legend>
-                <div class="flex gap-4 pt-2">
-                  <button
-                    type="submit"
-                    data-role="runner"
-                    id="btn-join-runner"
-                    class="hidden flex-1 rounded-xl border border-[#2DD6B7] bg-transparent py-3 text-lg font-bold text-[#2DD6B7] transition duration-200 hover:border-accent hover:bg-[#2DD6B7]/10 hover:text-accent active:scale-[0.99]"
-                  >
-                    Join as Runner
+              <fieldset class="block pt-2">
+                <legend class="mb-3 font-mono text-xs uppercase tracking-[0.1em] text-gray-400 text-center w-full">Select Operational Role</legend>
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <button type="submit" data-role="runner" id="btn-join-runner" class="hidden relative flex-1 overflow-hidden rounded-sm border border-brand bg-brand/10 py-4 font-heading text-lg tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.4)] active:scale-[0.98]">
+                    JOIN AS RUNNER
                   </button>
-                  <button
-                    type="submit"
-                    data-role="hunter"
-                    id="btn-join-hunter"
-                    class="flex-1 rounded-xl border border-[#2DD6B7] bg-transparent py-3 text-lg font-bold text-[#2DD6B7] transition duration-200 hover:border-accent hover:bg-[#2DD6B7]/10 hover:text-accent active:scale-[0.99]"
-                  >
-                    Join as Hunter
+                  <button type="submit" data-role="hunter" id="btn-join-hunter" class="relative flex-1 overflow-hidden rounded-sm border border-brand bg-brand/10 py-4 font-heading text-lg tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.4)] active:scale-[0.98]">
+                    JOIN AS HUNTER
                   </button>
                 </div>
               </fieldset>
             </form>
           </section>
 
-          <!-- GAME UI (ZICHTBAAR NA JOINEN) -->
-          <section
-            id="game-ui"
-            class="mt-8 hidden border-t border-[#2DD6B7]/30 pt-6"
-          >
-            <h2
-              id="role-display"
-              class="text-center text-2xl font-bold text-[#2DD6B7]"
-            ></h2>
+          <!-- GAME UI -->
+          <section id="game-ui" class="hidden mt-4 animate-fade-in">
+            
+            <div class="mb-6 rounded-md bg-brand/10 border border-brand/20 p-4 text-center">
+              <h2 id="role-display" class="font-heading text-3xl tracking-widest text-brand drop-shadow-[0_0_8px_rgba(45,214,183,0.5)] uppercase"></h2>
+            </div>
 
-            <button
-              id="leave-session"
-              class="mt-4 w-full rounded-xl border border-red-500/50 bg-red-500/10 px-6 py-2 text-sm font-bold text-red-400 transition duration-200 hover:bg-red-500/20 active:scale-[0.99]"
-            >
-              Leave Session
+            <button id="leave-session" class="mb-8 w-full rounded-sm border border-red-500/40 bg-red-500/10 py-2.5 font-mono text-xs uppercase tracking-widest text-red-400 transition hover:bg-red-500/20 hover:text-red-300 active:scale-[0.99]">
+              [ Terminate Session ]
             </button>
 
-            <button
-              id="share-location"
-              class="mt-6 w-full rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7] transition duration-200 hover:border-accent hover:bg-[#2DD6B7]/10 hover:text-accent active:scale-[0.99]"
-            >
-              Share my location
+            <button id="share-location" class="relative w-full overflow-hidden rounded-sm border border-brand bg-brand/20 py-4 font-heading text-xl tracking-wider text-white transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.5)] active:scale-[0.98]">
+              <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent hover:animate-[shimmer_1.5s_infinite]"></span>
+              INITIATE GPS UPLINK
             </button>
 
             <!-- EIGEN LOCATIE EN COÖRDINATEN -->
-            <div
-              id="location-info"
-              class="mt-4 rounded-xl border border-[#2DD6B7]/40 bg-black/20 p-4 text-center"
-            >
-              <p id="location" class="text-sm font-medium text-[#73e6d0]">
-                Nog geen locatie gedeeld.
-              </p>
-              <p
-                id="coordinates"
-                class="mt-1 font-mono text-xs text-[#2DD6B7]/80"
-              >
-                Coördinaten: --, --
-              </p>
+            <div id="location-info" class="mt-6 rounded-sm border border-white/10 bg-black/50 p-4 text-center relative overflow-hidden">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand/50"></div>
+              <p id="location" class="font-mono text-sm text-gray-300">Awaiting coordinates...</p>
+              <p id="coordinates" class="mt-2 font-mono text-xs text-brand/70">LAT: -- | LNG: --</p>
             </div>
 
             <!-- OPENSTREETMAP CONTAINER -->
-            <div class="mt-6">
-              <label
-                class="mb-2 block text-sm font-bold uppercase tracking-wider text-[#2DD6B7]"
-              >
-                Live Radar Kaart
-              </label>
-              <div
-                id="map"
-                class="h-64 w-full rounded-xl border border-[#2DD6B7] bg-[#2a2a2a] shadow-inner"
-              ></div>
+            <div class="mt-8 relative">
+              <div class="absolute -top-3 left-4 bg-[#11181f] px-2 font-mono text-xs uppercase tracking-[0.2em] text-brand z-10 border border-brand/30 rounded-sm">Tactical Map</div>
+              <div id="map" class="h-72 w-full rounded-sm border border-brand/30 bg-[#0a0f14] z-0"></div>
+              
+              <!-- Map scanline effect (pointer events none so it doesn't block map interaction) -->
+              <div class="pointer-events-none absolute inset-0 z-[400] overflow-hidden rounded-sm mix-blend-overlay opacity-30">
+                <div class="h-1 w-full bg-brand shadow-[0_0_10px_#2DD6B7] animate-[scanline_4s_linear_infinite]"></div>
+              </div>
             </div>
 
-            <!-- RUNNER LOCATIE RADAR (ALLEEN VOOR HUNTERS - STANDAARD VERBORGEN) -->
-            <div
-              id="runner-radar-box"
-              class="mt-6 hidden rounded-xl border border-[#2DD6B7] bg-[#2DD6B7]/10 p-4"
-            >
-              <div class="flex items-center justify-between">
-                <h3 class="flex items-center gap-2 font-bold text-[#2DD6B7]">
-                  <iconify-icon
-                    icon="mdi:radar"
-                    class="text-2xl animate-spin"
-                  ></iconify-icon>
-                  Runner Radar (5m Update)
-                </h3>
-                <span
-                  id="radar-timer"
-                  class="rounded-md border border-[#2DD6B7]/50 bg-black/40 px-2 py-1 font-mono text-xs text-[#73e6d0]"
-                >
-                  Wachten op Runner...
+            <!-- RUNNER LOCATIE RADAR (HUNTERS ONLY) -->
+            <div id="runner-radar-box" class="mt-8 hidden rounded-sm border border-brand/50 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand/20 to-transparent p-5 relative overflow-hidden">
+              <div class="absolute top-0 right-0 p-2 opacity-20">
+                <iconify-icon icon="mdi:radar" class="text-6xl animate-spin-slow text-brand"></iconify-icon>
+              </div>
+              
+              <div class="relative z-10 flex items-center justify-between border-b border-brand/20 pb-3">
+                <h3 class="font-heading tracking-widest text-lg text-brand drop-shadow-[0_0_5px_rgba(45,214,183,0.5)]">TARGET RADAR</h3>
+                <span id="radar-timer" class="rounded-sm bg-black/60 px-3 py-1 font-mono text-[10px] uppercase text-brand border border-brand/30">
+                  SCANNING...
                 </span>
               </div>
 
-              <p
-                id="runner-coordinates"
-                class="mt-3 font-mono text-sm text-[#73e6d0]"
-              >
-                Laatst bekende locatie: Wachten op signaal...
+              <p id="runner-coordinates" class="relative z-10 mt-4 font-mono text-xs tracking-wider text-gray-300">
+                LKP (Last Known Position): <span class="text-brand">UNKNOWN</span>
               </p>
 
-              <!-- TESTKNOP (VOOR INSTANT PULSE) -->
-              <button
-                id="btn-pulse-now"
-                type="button"
-                class="mt-3 w-full rounded-lg border border-[#2DD6B7] bg-[#2DD6B7]/20 py-2 text-xs font-bold uppercase tracking-wider text-[#2DD6B7] transition hover:bg-[#2DD6B7]/40 active:scale-[0.98]"
-              >
-                ⚡ Pulse Radar Now (Instant Test)
+              <button id="btn-pulse-now" type="button" class="relative z-10 mt-5 w-full rounded-sm border border-brand/60 bg-brand/10 py-3 font-mono text-xs font-bold uppercase tracking-widest text-brand transition hover:bg-brand hover:text-black hover:shadow-[0_0_15px_rgba(45,214,183,0.4)] active:scale-[0.98]">
+                ⚡ MANUAL PULSE
               </button>
             </div>
 
             <!-- SPELERSLIJST -->
-            <div class="mt-8 border-t border-[#2DD6B7]/30 pt-6">
-              <h3
-                class="text-lg font-bold uppercase tracking-wider text-[#2DD6B7]"
-              >
-                Spelers in sessie (<span id="session-code-display"
-                  >CATCH123</span
-                >)
-              </h3>
-              <ul id="players-list" class="mt-4 flex flex-col gap-3">
-                <!-- Spelers worden hier dynamisch ingeladen -->
+            <div class="mt-10 border-t border-white/10 pt-8">
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="font-mono text-xs uppercase tracking-[0.1em] text-gray-400">Squad Members</h3>
+                <span class="font-mono text-xs text-brand border border-brand/30 px-2 py-0.5 rounded-sm bg-brand/5">ID: <span id="session-code-display" class="font-bold">----</span></span>
+              </div>
+              <ul id="players-list" class="flex flex-col gap-2">
+                <!-- Dynamisch ingeladen -->
               </ul>
             </div>
           </section>
         </section>
       </div>
 
-      <div data-contact-reveal class="w-full max-w-xl">
-        <section
-          data-contact-card
-          class="w-full rounded-2xl border border-[#2DD6B7] bg-[#3a3a3a] p-8 shadow-[0_0_0_1px_rgba(45,214,183,0.3)]"
-        >
-          <h2 class="mb-8 text-center text-5xl font-bold text-[#2DD6B7]">
-            Contact
-          </h2>
+      <!-- CONTACT FORM -->
+      <div data-contact-reveal class="w-full max-w-2xl mt-8">
+        <section data-contact-card class="group relative w-full overflow-hidden rounded-xl border border-brand/30 bg-[#11181f]/80 p-8 backdrop-blur-xl shadow-[0_0_30px_rgba(45,214,183,0.1)] transition-all hover:border-brand/60 hover:shadow-[0_0_40px_rgba(45,214,183,0.15)]">
+          
+          <!-- Decorative Corners -->
+          <div class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"></div>
+          <div class="absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-brand"></div>
+          <div class="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-brand"></div>
+          <div class="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-brand"></div>
 
-          <form
-            action="https://api.web3forms.com/submit"
-            method="POST"
-            class="space-y-6"
-          >
-            <input
-              type="hidden"
-              name="access_key"
-              value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc"
-            />
-            <label class="block">
-              <span class="mb-2 block text-xl text-[#2DD6B7]">Name</span>
-              <input
-                type="text"
-                name="name"
-                required
-                class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none transition placeholder:text-[#73e6d0] focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"
-              />
-            </label>
+          <header class="mb-10 flex flex-col items-center border-b border-white/10 pb-6">
+            <h2 class="font-heading text-4xl uppercase tracking-widest text-brand drop-shadow-[0_0_10px_rgba(45,214,183,0.4)]">Comms Channel</h2>
+            <p class="mt-3 font-mono text-xs uppercase tracking-widest text-brand/80">Secure Transmission Link</p>
+          </header>
 
-            <label class="block">
-              <span class="mb-2 block text-xl text-[#2DD6B7]">E-mailadres</span>
-              <input
-                type="email"
-                name="email"
-                required
-                class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none transition placeholder:text-[#73e6d0] focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"
-              />
-            </label>
+          <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+            <input type="hidden" name="access_key" value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc" />
+            
+            <div class="space-y-5">
+              <label class="block group/input">
+                <span class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors">Agent Name</span>
+                <div class="relative">
+                  <input type="text" name="name" required placeholder="Enter Name" class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]" />
+                  <div class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"></div>
+                </div>
+              </label>
 
-            <label class="block">
-              <span class="mb-2 block text-xl text-[#2DD6B7]"
-                >Type question</span
-              >
-              <input
-                type="text"
-                name="subject"
-                class="w-full rounded-full border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none transition placeholder:text-[#73e6d0] focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"
-              />
-            </label>
+              <label class="block group/input">
+                <span class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors">Email Coordinates</span>
+                <div class="relative">
+                  <input type="email" name="email" required placeholder="Enter Email" class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]" />
+                  <div class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"></div>
+                </div>
+              </label>
 
-            <label class="block">
-              <span class="mb-2 block text-xl text-[#2DD6B7]">Add Message</span>
-              <textarea
-                name="message"
-                rows="5"
-                required
-                class="w-full rounded-[1.75rem] border border-[#2DD6B7] bg-transparent px-4 py-3 text-[#2DD6B7] outline-none transition placeholder:text-[#73e6d0] focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-brand/40"
-              ></textarea>
-            </label>
+              <label class="block group/input">
+                <span class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors">Transmission Type</span>
+                <div class="relative">
+                  <input type="text" name="subject" placeholder="Enter Subject" class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]" />
+                  <div class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"></div>
+                </div>
+              </label>
 
-            <button
-              type="submit"
-              class="mt-2 rounded-xl border border-[#2DD6B7] bg-transparent px-6 py-3 text-xl font-bold text-[#2DD6B7] transition duration-200 hover:border-accent hover:bg-brand/10 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand active:scale-[0.99]"
-            >
-              Send message
+              <label class="block group/input">
+                <span class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors">Message Payload</span>
+                <div class="relative">
+                  <textarea name="message" rows="5" required placeholder="Enter Data..." class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"></textarea>
+                  <div class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"></div>
+                </div>
+              </label>
+            </div>
+
+            <button type="submit" class="relative mt-4 w-full overflow-hidden rounded-sm border border-brand bg-brand/10 py-4 font-heading text-lg tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.4)] active:scale-[0.98]">
+              <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent hover:animate-[shimmer_1.5s_infinite]"></span>
+              SEND TRANSMISSION
             </button>
           </form>
         </section>
       </div>
+
     </main>
 
     <script type="module" src="/src/main.ts"></script>
+    
+    <style>
+      @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(72rem); }
+      }
+      @keyframes scrollGrid {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(40px); } /* matches background size */
+      }
+      @keyframes floatOrb {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -50px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.9); }
+      }
+      .animate-spin-slow {
+        animation: spin 8s linear infinite;
+      }
+    </style>
   </body>
 </html>
