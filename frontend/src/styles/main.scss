@@ -1,7 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumar+One&display=swap");
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+  margin: 0;
+  padding: 0;
 }
+
+.faq-item summary {
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary > span:first-child {
+  transition: color 240ms ease, text-shadow 240ms ease;
+}
+
+.faq-item[open] summary > span:first-child {
+  color: var(--color-brand);
+  text-shadow:
+    0 0 8px color-mix(in srgb, var(--color-brand) 70%, transparent),
+    0 0 18px color-mix(in srgb, var(--color-brand) 36%, transparent);
+}
+
+.faq-toggle {
+  transition: transform 200ms ease;
+}
+
+.faq-item[open] .faq-toggle {
+  transform: rotate(45deg);
+}
+
+.team-initial {
+  animation: team-initial-glow 3.2s ease-in-out infinite;
+}
+
+.team-name {
+  animation: team-name-glow 3.2s ease-in-out infinite;
+}
+
+#team li:nth-child(2) .team-initial,
+#team li:nth-child(2) .team-name {
+  animation-delay: 180ms;
+}
+
+#team li:nth-child(3) .team-initial,
+#team li:nth-child(3) .team-name {
+  animation-delay: 560ms;
+}
+
+#team li:nth-child(4) .team-initial,
+#team li:nth-child(4) .team-name {
+  animation-delay: 940ms;
+}
+
+#team li:nth-child(5) .team-initial,
+#team li:nth-child(5) .team-name {
+  animation-delay: 1320ms;
+}
+
+@keyframes team-initial-glow {
+  0%,
+  100% {
+    border-color: rgba(45, 214, 183, 0.5);
+    box-shadow: 0 0 0 0 rgba(45, 214, 183, 0);
+  }
+
+  50% {
+    border-color: rgba(45, 214, 183, 0.95);
+    box-shadow: 0 0 16px 2px rgba(45, 214, 183, 0.32);
+  }
+}
+
+@keyframes team-name-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(45, 214, 183, 0);
+  }
+
+  50% {
+    text-shadow: 0 0 8px rgba(45, 214, 183, 0.7), 0 0 18px rgba(45, 214, 183, 0.36);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-initial {
+    animation: none;
+    box-shadow: 0 0 10px 1px rgba(45, 214, 183, 0.24);
+  }
+
+  .team-name {
+    animation: none;
+    text-shadow: 0 0 8px rgba(45, 214, 183, 0.26);
+  }
+  
+  .contact-reveal-pending {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+
+  }
+}
+.contact-reveal-pending {
+  --contact-reveal-clip: inset(0 0 100%);
+  --contact-reveal-transform: translateY(-1rem) scaleY(0.96);
+  --contact-reveal-origin: top;
+  clip-path: var(--contact-reveal-clip);
+  opacity: 0;
+  transform: var(--contact-reveal-transform);
+  transform-origin: var(--contact-reveal-origin);
+  transition:
+    clip-path 950ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 650ms ease,
+    transform 950ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.contact-reveal-from-bottom {
+  --contact-reveal-clip: inset(100% 0 0);
+  --contact-reveal-transform: translateY(1rem) scaleY(0.96);
+  --contact-reveal-origin: bottom;
+}
+
+.contact-reveal-visible {
+  --contact-reveal-clip: inset(0);
+  --contact-reveal-transform: translateY(0) scaleY(1);
+  opacity: 1;
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+
+  img {
+    height: 50px;
+  }
+  color: var(--color-accent);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+footer {
+  padding: 1rem;
+  display: flex;
+
+  img {
+    height: 50px;
+  }
+  color: var(--color-accent);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-top: 3px solid;
+  border-color: rgba(45, 214, 183, 0.95);
+  justify-content: space-evenly;
+}
+
+#chase-video-map {
+  height: clamp(420px, 65vh, 620px);
+  width: 100%;
+  z-index: 0;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(45, 214, 183, 0.3);
+  background: #0a111c;
+}
+
+.chase-video-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a111c;
+  border: 1px solid #2dd6b7;
+  border-radius: 0.5rem;
+  color: #2dd6b7;
+  box-shadow: 0 0 16px rgba(45, 214, 183, 0.4);
+  font: bold 13px monospace;
+}
+
+.chase-video-leaflet-popup {
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #0a111c;
+    color: #e5e7eb;
+  }
+  .leaflet-popup-close-button { color: #2dd6b7; }
+}
+
+.chase-video-popup {
+  width: min(280px, 65vw);
+  h3 { font: bold 16px sans-serif; color: #2dd6b7; margin: 0 0 12px; }
+  video { display: block; width: 100%; max-height: 240px; border-radius: 8px; background: #000; }
+  .chase-video-placeholder { padding: 35px 16px; text-align: center; border: 1px dashed #2dd6b7; border-radius: 8px; }
+}
+
+#zone-editor-map { height: 320px; width: 100%; border-radius: 12px; z-index: 0; }

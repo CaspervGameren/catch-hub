@@ -1,14 +1,892 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catch Hub</title>
-</head>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catch Hub // Tactical Cyber Uplink</title>
 
-<body>
-  <div id="app"></div>
+    <!-- Google Fonts & FontAwesome / Iconify -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-  <script type="module" src="/src/main.ts"></script>
-</body>
+    <!-- Leaflet CSS for OpenStreetMap -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                DEFAULT: "#2DD6B7",
+                neon: "#00ffcc",
+                pink: "#ff007f",
+                teal: "#14b8a6",
+                dark: "#050a12",
+                glass: "rgba(15, 23, 42, 0.65)",
+              },
+            },
+            fontFamily: {
+              heading: ["Orbitron", "sans-serif"],
+              sans: ["Rajdhani", "sans-serif"],
+              mono: ["Share Tech Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Pure CSS Dynamic Animations & Custom Styling */
+      :root {
+        --neon-brand: #2dd6b7;
+        --neon-pink: #ff007f;
+      }
+
+      body {
+        background-color: #040810;
+        color: #e2e8f0;
+        font-family: "Rajdhani", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* Cyber grid background movement - Pure CSS */
+      .bg-cyber-grid {
+        background-size: 50px 50px;
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(45, 214, 183, 0.07) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(45, 214, 183, 0.07) 1px,
+            transparent 1px
+          );
+        animation: scrollGrid 18s linear infinite;
+      }
+
+      @keyframes scrollGrid {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 50px 50px;
+        }
+      }
+
+      /* Animated Glowing Floating Background Orbs - Pure CSS */
+      .orb-1 {
+        animation: floatOrbOne 14s ease-in-out infinite alternate;
+      }
+      .orb-2 {
+        animation: floatOrbTwo 18s ease-in-out infinite alternate;
+      }
+      .orb-3 {
+        animation: floatOrbThree 22s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatOrbOne {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.4;
+        }
+        50% {
+          transform: translate(80px, -60px) scale(1.15);
+          opacity: 0.6;
+        }
+        100% {
+          transform: translate(-40px, 90px) scale(0.9);
+          opacity: 0.4;
+        }
+      }
+
+      @keyframes floatOrbTwo {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translate(-90px, 50px) scale(1.2);
+          opacity: 0.5;
+        }
+        100% {
+          transform: translate(50px, -80px) scale(0.95);
+          opacity: 0.3;
+        }
+      }
+
+      @keyframes floatOrbThree {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.25;
+        }
+        50% {
+          transform: translate(60px, 70px) scale(1.1);
+          opacity: 0.45;
+        }
+        100% {
+          transform: translate(-70px, -40px) scale(0.85);
+          opacity: 0.25;
+        }
+      }
+
+      /* Pure CSS Entrance Animations with Stagger */
+      .fade-in-up {
+        opacity: 0;
+        animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Advanced Glassmorphism Styling */
+      .glass-card {
+        background: rgba(10, 17, 28, 0.72);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(45, 214, 183, 0.3);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.8),
+          0 0 30px rgba(45, 214, 183, 0.12);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .glass-card:hover {
+        border-color: rgba(45, 214, 183, 0.6);
+        box-shadow:
+          0 25px 60px rgba(0, 0, 0, 0.85),
+          0 0 45px rgba(45, 214, 183, 0.22);
+      }
+
+      /* Pure CSS Shimmer Animation */
+      @keyframes shimmer {
+        100% {
+          transform: translateX(200%);
+        }
+      }
+      .animate-shimmer {
+        animation: shimmer 2s infinite;
+      }
+
+      /* Radar Map Scanline Animation */
+      @keyframes scanline {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(1000%);
+        }
+      }
+      .animate-scanline {
+        animation: scanline 5s linear infinite;
+      }
+
+      .animate-spin-slow {
+        animation: spin 9s linear infinite;
+      }
+
+      /* Custom Cyber Glow Text */
+      .text-neon-cyan {
+        color: #2dd6b7;
+        text-shadow:
+          0 0 12px rgba(45, 214, 183, 0.7),
+          0 0 25px rgba(45, 214, 183, 0.3);
+      }
+
+      /* Custom Cyber Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #040810;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(45, 214, 183, 0.3);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(45, 214, 183, 0.7);
+      }
+    </style>
+  </head>
+
+  <body
+    class="selection:bg-brand selection:text-black min-h-screen relative overflow-x-hidden"
+  >
+    <!-- DYNAMIC BACKGROUND WITH AMBIENT ANIMATED ORBS AND GRID -->
+    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <!-- Animated Moving Cyber Grid -->
+      <div
+        class="absolute inset-0 bg-cyber-grid [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,#000_75%,transparent_100%)]"
+      ></div>
+
+      <!-- Pure CSS Ambient Floating Glowing Orbs -->
+      <div
+        class="orb-1 absolute -top-40 -left-40 h-[600px] w-[600px] rounded-full bg-brand/20 blur-[130px]"
+      ></div>
+      <div
+        class="orb-2 absolute top-1/3 -right-40 h-[500px] w-[500px] rounded-full bg-teal-500/15 blur-[120px]"
+      ></div>
+      <div
+        class="orb-3 absolute -bottom-40 left-1/4 h-[650px] w-[650px] rounded-full bg-brand/10 blur-[150px]"
+      ></div>
+
+      <!-- Scanline Background Texture -->
+      <div
+        class="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.35)_51%)] bg-[size:100%_4px] opacity-30"
+      ></div>
+    </div>
+
+    <!-- NAVIGATIE -->
+    <nav
+      class="sticky top-0 z-50 flex items-center justify-between border-b border-brand/25 bg-[#050a12]/80 px-6 lg:px-12 py-4 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
+    >
+      <a href="/" class="flex items-center gap-3 group">
+        <div
+          class="relative flex items-center justify-center w-10 h-10 rounded-lg bg-brand/10 border border-brand/40 group-hover:border-brand transition duration-500 shadow-[0_0_15px_rgba(45,214,183,0.3)]"
+        >
+          <iconify-icon
+            icon="mdi:radar"
+            class="text-2xl text-brand group-hover:rotate-180 transition-transform duration-700"
+          ></iconify-icon>
+          <div
+            class="absolute inset-0 rounded-lg bg-brand/20 blur-md opacity-0 group-hover:opacity-100 transition duration-500"
+          ></div>
+        </div>
+        <span
+          class="font-heading text-2xl tracking-widest text-white uppercase drop-shadow-[0_0_10px_rgba(45,214,183,0.6)]"
+        >
+          Catch<span class="text-brand">Hub</span>
+        </span>
+      </a>
+
+      <div class="flex items-center gap-3 sm:gap-5">
+        <a href="#contact" class="font-heading text-xs sm:text-sm text-brand transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">CONTACT</a>
+      <a
+        href="/signup/"
+        class="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-brand/60 bg-brand/10 px-5 py-2.5 font-heading text-sm font-bold tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.7)] active:scale-95"
+      >
+        <span
+          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
+        ></span>
+        <iconify-icon
+          icon="mdi:account-plus-outline"
+          class="text-lg"
+        ></iconify-icon>
+        <span>LOGIN</span>
+      </a>
+      </div>
+    </nav>
+
+    <!-- HERO HEADER (Simplified & Cleaned: Badges Removed) -->
+    <header
+      class="relative z-10 mx-auto flex flex-col items-center justify-center w-full max-w-7xl px-4 sm:px-6 pt-10 pb-12 text-center"
+    >
+      <h1
+        class="fade-in-up font-heading mb-6 text-6xl sm:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tight text-white drop-shadow-2xl"
+      >
+        Hunt or be <br />
+        <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-brand via-teal-200 to-brand-neon text-neon-cyan"
+        >
+          Hunted
+        </span>
+      </h1>
+
+      <p
+        class="fade-in-up delay-100 max-w-2xl text-lg sm:text-xl font-light leading-relaxed text-gray-300 font-sans"
+      >
+        Initiate your session. Track targets on live radar. Secure your
+        perimeter.
+      </p>
+      <section id="chase-videos" aria-labelledby="chase-videos-title" class="glass-card relative mt-8 text-left w-full scroll-mt-28 overflow-hidden rounded-2xl border border-brand/25 p-6 sm:p-10">
+        <p class="mb-3 font-mono text-xs uppercase tracking-widest text-brand">Rotterdam / Beurs</p>
+        <h2 id="chase-videos-title" class="mb-4 text-3xl font-bold text-white text-neon-cyan sm:text-4xl">The chase in action</h2>
+        <p class="mb-6 font-text text-lg text-gray-300">Follow the chase through Rotterdam. Tap a numbered spot to watch our team's footage.</p>
+        <div id="chase-video-map" role="region" aria-label="Team video spots around Beurs in Rotterdam"></div>
+        <p class="mt-4 font-mono text-xs text-gray-400">Explore the chase around Beurs · Team footage coming soon</p>
+      </section>
+
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER (Expanded Card Widths: max-w-4xl / max-w-5xl) -->
+    <main
+      class="relative z-10 mx-auto flex flex-col items-center justify-center gap-14 px-4 sm:px-6 pb-24 w-full max-w-5xl"
+    >
+      <!-- GAME UI PANEL (Wider Card Width) -->
+      <div class="fade-in-up delay-200 w-full">
+        <section
+          class="glass-card group relative w-full rounded-2xl p-6 sm:p-10 relative overflow-hidden"
+        >
+          <!-- Cyber Corner Accent Markers -->
+          <div
+            class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"
+          ></div>
+          <div
+            class="absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-brand"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-brand"
+          ></div>
+          <div
+            class="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-brand"
+          ></div>
+
+          <header
+            class="mb-10 flex flex-col items-center border-b border-brand/20 pb-6"
+          >
+            <h2
+              class="font-heading text-3xl sm:text-4xl uppercase tracking-widest text-white text-neon-cyan font-black"
+            >
+              Lobby Uplink
+            </h2>
+            <div class="mt-3 flex items-center gap-2">
+              <span class="h-2 w-2 animate-ping rounded-full bg-brand"></span>
+              <p
+                id="socket-status"
+                class="font-mono text-xs uppercase tracking-widest text-brand"
+              >
+                Establishing connection...
+              </p>
+            </div>
+          </header>
+
+          <!-- FORMULIER (Grid Layout for Optimized Input Widths) -->
+          <section id="join-section">
+            <form id="join-form" class="space-y-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Callsign Input -->
+                <label class="block group/input">
+                  <span
+                    class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors flex items-center gap-1.5"
+                  >
+                    <iconify-icon
+                      icon="mdi:account-badge-outline"
+                      class="text-brand text-sm"
+                    ></iconify-icon>
+                    Callsign (Name)
+                  </span>
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="player-name"
+                      name="playerName"
+                      required
+                      placeholder="Enter CallSign"
+                      class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                    />
+                    <div
+                      class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                    ></div>
+                  </div>
+                </label>
+
+                <!-- Session ID Input -->
+                <label class="block group/input">
+                  <span
+                    class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors flex items-center gap-1.5"
+                  >
+                    <iconify-icon
+                      icon="mdi:key-wireless"
+                      class="text-brand text-sm"
+                    ></iconify-icon>
+                    Session ID
+                  </span>
+                  <div class="relative">
+                    <input
+                      type="text"
+                      id="session-code"
+                      name="sessionCode"
+                      required
+                      value="CATCH123"
+                      placeholder="XXXXXX"
+                      class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white uppercase outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                    />
+                    <div
+                      class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                    ></div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Role Selector Buttons -->
+              <fieldset class="block pt-2">
+                <legend
+                  class="mb-4 font-mono text-xs uppercase tracking-widest text-gray-400 text-center w-full"
+                >
+                  Select Operational Role
+                </legend>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <button
+                    type="submit"
+                    data-role="runner"
+                    id="btn-join-runner"
+                    class="hidden relative flex-1 overflow-hidden rounded-lg border border-brand/60 bg-brand/10 py-4 font-heading font-bold text-base tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.6)] active:scale-95"
+                  >
+                    JOIN AS RUNNER
+                  </button>
+                  <button
+                    type="submit"
+                    data-role="hunter"
+                    id="btn-join-hunter"
+                    class="relative flex-1 overflow-hidden rounded-lg border border-brand/60 bg-brand/10 py-4 font-heading font-bold text-base tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.6)] active:scale-95"
+                  >
+                    JOIN AS HUNTER
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </section>
+
+          <!-- GAME UI (Active State) -->
+          <section id="game-ui" class="hidden mt-4 space-y-6">
+            <div class="rounded-xl border border-brand/30 bg-black/30 p-4 space-y-3">
+              <p id="game-zone-summary" class="font-mono text-sm text-brand">Wachten op spelzone</p>
+              <button id="enable-zone-audio" type="button" class="rounded-lg border border-brand/50 px-4 py-2 text-sm text-brand">Alarmgeluid inschakelen</button>
+              <p id="zone-warning" role="alert" hidden class="rounded-lg border border-red-400 bg-red-950 p-4 font-mono text-red-100"></p>
+              <div id="host-zone-controls" hidden>
+                <h3 class="mb-2 text-brand">Kies de spelzone</h3>
+                <p class="mb-3 font-text text-gray-300">Klik op twee tegenoverliggende hoeken om een rechthoek te tekenen. Sla de zone op en start daarna het spel.</p>
+                <div id="zone-editor-map" aria-label="Kies twee hoeken van de spelzone"></div>
+                <div class="mt-3 flex flex-wrap gap-3">
+                  <button id="save-game-zone" type="button" disabled class="rounded-lg border border-brand px-4 py-2 text-brand disabled:opacity-40">Zone opslaan</button>
+                  <button id="start-zone-game" type="button" disabled class="rounded-lg bg-brand px-4 py-2 text-black disabled:opacity-40">Spel starten</button>
+                </div>
+                <p id="zone-editor-status" role="status" class="mt-2 font-text text-gray-300"></p>
+              </div>
+            </div>
+            <div
+              class="rounded-xl bg-brand/10 border border-brand/30 p-4 text-center backdrop-blur-md"
+            >
+              <h2
+                id="role-display"
+                class="font-heading text-3xl tracking-widest text-brand text-neon-cyan uppercase font-black"
+              ></h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button
+                id="share-location"
+                class="relative overflow-hidden rounded-lg border border-brand bg-brand/20 py-4 font-heading text-lg font-bold tracking-wider text-white transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.6)] active:scale-95 flex items-center justify-center gap-2"
+              >
+                <span
+                  class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shimmer"
+                ></span>
+                <iconify-icon
+                  icon="mdi:crosshair-gps"
+                  class="text-xl"
+                ></iconify-icon>
+                <span>INITIATE GPS UPLINK</span>
+              </button>
+
+              <button
+                id="leave-session"
+                class="rounded-lg border border-red-500/40 bg-red-500/10 py-4 font-mono text-xs uppercase tracking-widest text-red-400 transition duration-300 hover:bg-red-500 hover:text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] active:scale-95 flex items-center justify-center gap-2"
+              >
+                <iconify-icon icon="mdi:power" class="text-base"></iconify-icon>
+                <span>TERMINATE SESSION</span>
+              </button>
+            </div>
+
+            <!-- EIGEN LOCATIE EN COÖRDINATEN -->
+            <div
+              id="location-info"
+              class="rounded-lg border border-brand/30 bg-black/60 p-5 text-center relative overflow-hidden backdrop-blur-md"
+            >
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand"></div>
+              <p id="location" class="font-mono text-sm text-gray-300">
+                Awaiting coordinates...
+              </p>
+              <p
+                id="coordinates"
+                class="mt-2 font-mono text-xs text-brand tracking-widest"
+              >
+                LAT: -- | LNG: --
+              </p>
+            </div>
+
+            <!-- OPENSTREETMAP CONTAINER -->
+            <div
+              class="relative rounded-xl overflow-hidden border border-brand/40 shadow-2xl"
+            >
+              <div
+                class="absolute top-3 left-4 bg-black/80 backdrop-blur-md px-3 py-1 font-mono text-xs uppercase tracking-widest text-brand z-[500] border border-brand/40 rounded-md"
+              >
+                TACTICAL RADAR STREAM
+              </div>
+              <div id="map" class="h-80 w-full z-0 bg-[#0a0f14]"></div>
+
+              <!-- Map Scanline effect -->
+              <div
+                class="pointer-events-none absolute inset-0 z-[400] overflow-hidden mix-blend-overlay opacity-30"
+              >
+                <div
+                  class="h-1 w-full bg-brand shadow-[0_0_10px_#2DD6B7] animate-scanline"
+                ></div>
+              </div>
+            </div>
+
+            <!-- RUNNER LOCATIE RADAR (HUNTERS ONLY) -->
+            <div
+              id="runner-radar-box"
+              class="hidden rounded-xl border border-brand/50 bg-gradient-to-r from-brand/20 via-black/80 to-transparent p-6 relative overflow-hidden"
+            >
+              <div class="absolute top-0 right-0 p-3 opacity-20">
+                <iconify-icon
+                  icon="mdi:radar"
+                  class="text-7xl animate-spin-slow text-brand"
+                ></iconify-icon>
+              </div>
+
+              <div
+                class="relative z-10 flex items-center justify-between border-b border-brand/20 pb-4"
+              >
+                <h3
+                  class="font-heading tracking-widest text-lg text-brand text-neon-cyan font-bold"
+                >
+                  TARGET RADAR
+                </h3>
+                <span
+                  id="radar-timer"
+                  class="rounded-md bg-black/80 px-3 py-1 font-mono text-xs uppercase text-brand border border-brand/30"
+                >
+                  SCANNING...
+                </span>
+              </div>
+
+              <p
+                id="runner-coordinates"
+                class="relative z-10 mt-4 font-mono text-sm tracking-wider text-gray-300"
+              >
+                LKP (Last Known Position):
+                <span class="text-brand font-bold">UNKNOWN</span>
+              </p>
+
+              <button
+                id="btn-pulse-now"
+                type="button"
+                class="relative z-10 mt-5 w-full rounded-md border border-brand/60 bg-brand/10 py-3.5 font-mono text-xs font-bold uppercase tracking-widest text-brand transition duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.5)] active:scale-95 flex items-center justify-center gap-2"
+              >
+                <iconify-icon
+                  icon="mdi:lightning-bolt"
+                  class="text-base"
+                ></iconify-icon>
+                <span>MANUAL PULSE</span>
+              </button>
+            </div>
+
+            <!-- SPELERSLIJST -->
+            <div class="border-t border-brand/20 pt-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3
+                  class="font-mono text-xs uppercase tracking-widest text-gray-400"
+                >
+                  Squad Members
+                </h3>
+                <span
+                  class="font-mono text-xs text-brand border border-brand/30 px-3 py-1 rounded-md bg-brand/10"
+                >
+                  ID:
+                  <span id="session-code-display" class="font-bold">----</span>
+                </span>
+              </div>
+              <ul id="players-list" class="space-y-2 font-mono text-sm">
+                <!-- Dynamisch ingeladen -->
+              </ul>
+            </div>
+          </section>
+        </section>
+      </div>
+
+      <section id="team" aria-labelledby="team-title" class="grid w-full max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p class="mb-4 font-text text-sm uppercase text-brand">The crew / 2026</p>
+          <h2 id="team-title" class="mb-6 text-4xl font-bold text-[#2DD6B7] md:text-5xl">Meet the team</h2>
+          <p class="max-w-xl font-text text-xl leading-relaxed text-neutral-200">
+            We're Bertan, Max, Casper, Tuna, Vince and Dave: a student team building Catch-Hub for a school project.
+          </p>
+          <p class="mt-4 max-w-xl font-text text-lg leading-relaxed text-neutral-400">
+            We love the mix of getting outside, thinking tactically, and bringing people together. Our goal is to turn a phone into the start of a real-life chase: hunters track fugitives on a live radar, and every session becomes its own adventure.
+          </p>
+        </div>
+
+        <ul aria-label="Catch-Hub team members" class="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+          <li class="pt-4">
+            <span aria-hidden="true" class="team-initial mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">B</span>
+            <h3 class="team-name font-heading text-lg text-text-white">Bertan</h3>
+          </li>
+          <li class="pt-4">
+            <span aria-hidden="true" class="team-initial mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">M</span>
+            <h3 class="team-name font-heading text-lg text-text-white">Max</h3>
+          </li>
+          <li class="pt-4">
+            <span aria-hidden="true" class="team-initial mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">C</span>
+            <h3 class="team-name font-heading text-lg text-text-white">Casper</h3>
+          </li>
+          <li class="pt-4">
+            <span aria-hidden="true" class="team-initial mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">T</span>
+            <h3 class="team-name font-heading text-lg text-text-white">Tuna</h3>
+          </li>
+          <li class="pt-4">
+            <span aria-hidden="true" class="team-initial mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">D</span>
+            <h3 class="team-name font-heading text-lg text-text-white">Dave</h3>
+          </li>
+          <li class="pt-4">
+            <span aria-hidden="true" class="team-initial mb-3 flex size-12 items-center justify-center rounded-lg border border-brand/50 bg-brand/10 font-heading text-lg text-brand">V</span>
+            <h3 class="team-name font-heading text-lg text-text-white">Vince</h3>
+          </li>
+        </ul>
+      </section>
+      <section id="faq" aria-labelledby="faq-title" class="w-full max-w-4xl">
+        <div class="mb-8">
+          <p class="mb-3 font-text text-sm uppercase text-brand">Good to know</p>
+          <h2 id="faq-title" class="text-4xl font-bold text-brand md:text-5xl">Frequently asked questions</h2>
+        </div>
+
+        <div class="border-y border-white/15">
+          <details class="faq-item border-b border-white/15">
+            <summary class="flex min-h-16 cursor-pointer items-center justify-between gap-6 py-5 text-left text-lg text-text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <span>What is Catch-Hub?</span>
+              <span aria-hidden="true" class="faq-toggle text-2xl text-brand">+</span>
+            </summary>
+            <p class="max-w-3xl pb-6 pr-10 font-text text-lg leading-relaxed text-text-white/70">
+              Catch-Hub is an unofficial, student-built GPS tag game inspired by Jachtseizoen. It brings groups together for a live chase.
+            </p>
+          </details>
+
+          <details class="faq-item border-b border-white/15">
+            <summary class="flex min-h-16 cursor-pointer items-center justify-between gap-6 py-5 text-left text-lg text-text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <span>How does a game work?</span>
+              <span aria-hidden="true" class="faq-toggle text-2xl text-brand">+</span>
+            </summary>
+            <p class="max-w-3xl pb-6 pr-10 font-text text-lg leading-relaxed text-text-white/70">
+              One group hunts while the other runs and hides. Hunters follow the fugitives on a live radar as the chase unfolds.
+            </p>
+          </details>
+
+          <details class="faq-item border-b border-white/15">
+            <summary class="flex min-h-16 cursor-pointer items-center justify-between gap-6 py-5 text-left text-lg text-text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <span>How do we get started?</span>
+              <span aria-hidden="true" class="faq-toggle text-2xl text-brand">+</span>
+            </summary>
+            <p class="max-w-3xl pb-6 pr-10 font-text text-lg leading-relaxed text-text-white/70">
+              Start a session from the button at the top of this page. Sessions use a code to get your group into the game.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="flex min-h-16 cursor-pointer items-center justify-between gap-6 py-5 text-left text-lg text-text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <span>Is Catch-Hub an official Jachtseizoen product?</span>
+              <span aria-hidden="true" class="faq-toggle text-2xl text-brand">+</span>
+            </summary>
+            <p class="max-w-3xl pb-6 pr-10 font-text text-lg leading-relaxed text-text-white/70">
+              No. Catch-Hub is an independent school project made by students, inspired by the chase-game format.
+            </p>
+          </details>
+        </div>
+      </section>
+      <!-- CONTACT -->
+      <div class="w-full">
+        <section
+          id="contact"
+          aria-labelledby="contact-title"
+          class="glass-card group relative w-full scroll-mt-28 rounded-2xl p-6 sm:p-10 overflow-hidden"
+        >
+          <!-- Cyber Corner Accent Markers -->
+          <div
+            class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"
+          ></div>
+          <div
+            class="absolute top-0 right-0 h-4 w-4 border-t-2 border-r-2 border-brand"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-brand"
+          ></div>
+          <div
+            class="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-brand"
+          ></div>
+
+          <header
+            class="mb-10 flex flex-col items-center border-b border-brand/20 pb-6"
+          >
+            <h2 id="contact-title"
+              class="font-heading text-3xl sm:text-4xl uppercase tracking-widest text-white text-neon-cyan font-black"
+            >
+              Contact
+            </h2>
+            <p
+              class="mt-2 font-mono text-xs uppercase tracking-widest text-brand/80"
+            >
+              Have a question? Send us a message.
+            </p>
+          </header>
+
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            class="space-y-6"
+          >
+            <input
+              type="hidden"
+              name="access_key"
+              value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc"
+            />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <label class="block group/input">
+                <span
+                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+                >
+                  Name
+                </span>
+                <div class="relative">
+                  <input
+                    type="text"
+                    name="name"
+                    autocomplete="name"
+                    required
+                    placeholder="Enter Name"
+                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                  />
+                  <div
+                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                  ></div>
+                </div>
+              </label>
+
+              <label class="block group/input">
+                <span
+                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+                >
+                  Email
+                </span>
+                <div class="relative">
+                  <input
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                    placeholder="Enter Email"
+                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                  />
+                  <div
+                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                  ></div>
+                </div>
+              </label>
+            </div>
+
+            <label class="block group/input">
+              <span
+                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+              >
+                Subject
+              </span>
+              <div class="relative">
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Enter Subject"
+                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                />
+                <div
+                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                ></div>
+              </div>
+            </label>
+
+            <label class="block group/input">
+              <span
+                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+              >
+                Message
+              </span>
+              <div class="relative">
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Write your message..."
+                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                ></textarea>
+                <div
+                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                ></div>
+              </div>
+            </label>
+
+            <button
+              type="submit"
+              class="relative w-full overflow-hidden rounded-lg border border-brand bg-brand/20 py-4 font-heading font-bold text-lg tracking-wider text-white transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_30px_rgba(45,214,183,0.7)] active:scale-95 flex items-center justify-center gap-2"
+            >
+              <span
+                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
+              ></span>
+              <iconify-icon
+                icon="mdi:send-lock-outline"
+                class="text-xl"
+              ></iconify-icon>
+              <span>SEND MESSAGE</span>
+            </button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+      class="relative z-10 border-t border-brand/20 bg-[#040810] py-8 font-mono text-xs text-gray-500"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div>© CATCH HUB TERMINAL // ALL RIGHTS RESERVED</div>
+        <div class="flex items-center gap-4 text-brand">
+          <a href="/pages/terms_and_conditions.txt" class="hover:underline">Terms and Conditions</a>
+          <span>•</span>
+          <a href="/pages/privacy_policy.txt" class="hover:underline">Privacy Policy</a>
+          <span>•</span>
+          <a href="#" class="hover:underline">TELEMETRY</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS MODULE IMPORT (Preserved original reference) -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

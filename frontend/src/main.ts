@@ -1,61 +1,178 @@
-import './styles/tailwind.css'
-import './styles/main.scss'
-import heroImg from './assets/hero.png'
-import typescriptLogo from './assets/typescript.svg'
-import viteLogo from './assets/vite.svg'
-import { setupCounter } from './counter.ts'
+import { initGameZone, renderGameZone, enableZoneAlarm } from "./gameZone";
+import { initChaseVideos } from "./chaseVideos";
+import "./styles/tailwind.css";
+import "./styles/main.scss";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${typescriptLogo}" class="framework" alt="TypeScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+import type { SessionResponse, Player } from "./types";
+import { getElement, showGameUi, renderPlayers } from "./ui";
+import { socket, initSocketListeners, sendLocationUpdate } from "./socket";
+import { startGpsTracking } from "./location";
+import { updateMapMarker } from "./map";
+import {
+  startHunterRadarTimer,
+  resetRadar,
+  triggerInstantPulse,
+  storeLatestRunnerLocation,
+} from "./radar";
 
-<div class="ticks"></div>
+initSocketListeners();
+initChaseVideos();
+initGameZone();
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://www.typescriptlang.org" target="_blank">
-          <img class="button-icon" src="${typescriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+let userRole: "runner" | "hunter" = "runner";
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+function checkSessionRoleAvailability() {
+  const code =
+    getElement<HTMLInputElement>("#session-code")?.value.trim() || "";
+  if (!code) return;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+  socket.emit("checkSessionStatus", code, (status) => {
+    const runnerBtn = getElement("#btn-join-runner");
+    if (runnerBtn) {
+      if (status.hasHunter) {
+        runnerBtn.classList.remove("hidden");
+      } else {
+        runnerBtn.classList.add("hidden");
+      }
+    }
+  });
+}
+
+socket.on("connect", () => {
+  checkSessionRoleAvailability();
+
+  const savedUsername = localStorage.getItem("catchhub_username");
+  const savedCode = localStorage.getItem("catchhub_sessionCode");
+  const savedRole = localStorage.getItem("catchhub_role") as
+    | "runner"
+    | "hunter";
+
+  if (savedUsername && savedCode && savedRole) {
+    userRole = savedRole;
+    socket.emit(
+      "joinSession",
+      { code: savedCode, username: savedUsername, role: savedRole },
+      (response: SessionResponse) => {
+        if (response.success && response.session) {
+          showGameUi(savedUsername, savedRole);
+          renderPlayers(response.session.players, socket.id);
+          renderGameZone(response.session);
+          checkRunnerAndManageTimer(response.session.players);
+          setupGameRoleListeners();
+        } else {
+          localStorage.removeItem("catchhub_username");
+          localStorage.removeItem("catchhub_sessionCode");
+          localStorage.removeItem("catchhub_role");
+        }
+      },
+    );
+  }
+});
+
+getElement("#session-code")?.addEventListener("input", () => {
+  checkSessionRoleAvailability();
+});
+
+getElement("#join-form")?.addEventListener("submit", (e: SubmitEvent) => {
+  e.preventDefault();
+  void enableZoneAlarm();
+
+  const submitter = (e.submitter ||
+    document.activeElement) as HTMLButtonElement | null;
+  userRole = (submitter?.dataset.role as "runner" | "hunter") || "runner";
+
+  const username =
+    getElement<HTMLInputElement>("#player-name")?.value.trim() || "";
+  const code =
+    getElement<HTMLInputElement>("#session-code")?.value.trim() || "";
+
+  if (!username || !code) return alert("Vul een naam en sessiecode in.");
+
+  socket.emit(
+    "joinSession",
+    { code, username, role: userRole },
+    (response: SessionResponse) => {
+      if (!response.success || !response.session) {
+        return alert(response.message);
+      }
+
+      localStorage.setItem("catchhub_username", username);
+      localStorage.setItem("catchhub_sessionCode", code);
+      localStorage.setItem("catchhub_role", userRole);
+
+      showGameUi(username, userRole);
+      renderPlayers(response.session.players, socket.id);
+      renderGameZone(response.session);
+      checkRunnerAndManageTimer(response.session.players);
+      setupGameRoleListeners();
+    },
+  );
+});
+
+socket.on("sessionUpdate", (session) => {
+  renderGameZone(session);
+  checkRunnerAndManageTimer(session.players);
+
+  const hasHunter = session.players.some((p) => p.role === "hunter");
+  const runnerBtn = getElement("#btn-join-runner");
+  if (runnerBtn) {
+    if (hasHunter) runnerBtn.classList.remove("hidden");
+    else runnerBtn.classList.add("hidden");
+  }
+});
+
+socket.on("runnerLocationUpdate", (data) => {
+  if (userRole === "hunter") {
+    storeLatestRunnerLocation(data.location);
+  }
+});
+
+getElement("#btn-pulse-now")?.addEventListener("click", () => {
+  triggerInstantPulse();
+});
+
+getElement("#share-location")?.addEventListener("click", () => {
+  startGpsTracking((coords) => {
+    sendLocationUpdate(coords);
+    updateMapMarker("me", coords, "Jouw GPS Locatie");
+  });
+});
+
+getElement("#leave-session")?.addEventListener("click", () => {
+  localStorage.removeItem("catchhub_username");
+  localStorage.removeItem("catchhub_sessionCode");
+  localStorage.removeItem("catchhub_role");
+  window.location.reload();
+});
+
+function setupGameRoleListeners() {
+  if (userRole === "runner") {
+    startGpsTracking((coords) => {
+      sendLocationUpdate(coords);
+      updateMapMarker("me", coords, "Jouw GPS Locatie");
+
+      const coordsText = getElement("#coordinates");
+      if (coordsText) {
+        coordsText.textContent = `Coördinaten: ${coords.latitude.toFixed(5)}, ${coords.longitude.toFixed(5)}`;
+      }
+    });
+  } else {
+    startHunterRadarTimer((runnerCoords) => {
+      updateMapMarker("runner", runnerCoords, "Laatst bekende Runner locatie");
+    });
+  }
+}
+
+function checkRunnerAndManageTimer(players: Player[]) {
+  if (userRole !== "hunter") return;
+
+  const hasRunner = players.some((p) => p.role === "runner" && !p.eliminated);
+
+  if (hasRunner) {
+    startHunterRadarTimer((runnerCoords) => {
+      updateMapMarker("runner", runnerCoords, "Laatst bekende Runner locatie");
+    });
+  } else {
+    resetRadar();
+  }
+}

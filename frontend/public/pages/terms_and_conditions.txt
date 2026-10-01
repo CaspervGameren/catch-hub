@@ -1,0 +1,48 @@
+Terms and Conditions
+
+This website and program are operated by Hogeschool Rotterdam. 
+Phone number: information: 010 794 9494
+Phone number: complaint: 010 794 4290
+E-mail: information: info@hogeschoolrotterdam.nl
+E-mail: complaint: klacht@hr.nl
+
+This website allows users to create an account. The information of which will be stored on a server.
+This website uses location-based features that are linked to your account.
+
+By using this website, we collect your device's approximate location to provide the location-based feature of the website. Location data is not stored on our server but is retained while your account remains active during a game. We do not sell your location data.
+
+An account must have a username, email, and password.
+By creating an account, you agree for the following data to be collected and stored in our database;
+- How many games have been played.
+- How many games have been played as a hunter.
+- How many games have been played as a runner.
+- How many games have been won as a hunter.
+- How many games have been won as a runner.
+- How many games have been lost as a hunter.
+- How many games have been lost as a runner.
+- The average time a game lasted while won as a hunter.
+- The average time a game lasts while lost as a runner.
+
+By using this website, you agree not to hack our website, server, database, or other players' accounts.
+
+The user must give access to their location while using this website to play a game of Catch-Hub.
+
+This website is provided as a school project and may occasionally be unavailable, changed, or discontinued.
+
+The website, design, logo, code, and text are owned by Hogeschool Rotterdam.
+
+By using this website, the user will upload their username, email, and a password hash. The user will also be uploading their location when playing a game.
+
+The account may be deleted if the website and its server will be discontinued. 
+Users can delete their account by going to their profile page and scrolling down to the delete account button, then pressing that button and confirming their choice.
+
+Terms and conditions may be added or changed over time.
+
+These Terms of Service shall be governed by and construed in accordance with the laws of the Netherlands, without regard to its conflict-of-law principles.
+
+To the extent permitted by applicable law, any disputes arising out of or in connection with these Terms or the use of the Website shall be submitted to the competent courts of the Netherlands.
+
+Phone number: information: 010 794 9494
+Phone number: complaint: 010 794 4290
+E-mail: information: info@hogeschoolrotterdam.nl
+E-mail: complaint: klacht@hr.nl

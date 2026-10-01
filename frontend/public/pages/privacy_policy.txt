@@ -1,0 +1,58 @@
+Privacy policy
+
+By using this website and creating/having an account, you agree to your data being stored on the server of Hogeschool Rotterdam. 
+Phone number: Information: 010 794 9494
+Phone number: complaint: 010 794 4290
+E-mail: information: info@hogeschoolrotterdam.nl
+E-mail: complaint: klacht@hr.nl
+
+The data collected includes:
+- The account ID.
+- The account username.
+- The account email.
+- The hash of the account password.
+- The current location.
+- How many games have been played.
+- How many games have been played as a hunter.
+- How many games have been played as a runner.
+- How many games have been won as a hunter.
+- How many games have been won as a runner.
+- How many games have been lost as a hunter.
+- How many games have been lost as a runner.
+- The average time a game lasted while won as a hunter.
+- The average time a game lasts while lost as a runner.
+
+By using this website, you agree to your data being collected for account creation, location based game mechanics, and statistics linked to the profile.
+
+By using this website, you agree to your data being stored on the server of Hogeschool Rotterdam.
+
+Hosting provider: NVT, het wordt lokaal gehost
+Database provider: MySQL, lokaal gehost tijdens de ontwikkelfase.
+Database 
+
+management system: phpMyAdmin.
+
+
+This data will be stored until the deletion of the account.
+
+You have the right to know and ask what personal data we hold about you and request a copy of that data. This may include your email address and location data associated with your account.
+You have the right to ask us to update your personal information if it's incorrect or incomplete.
+You have the right to delete your account and your personal data connected to it. We will delete your personal data from the database.
+In certain circumstances, you have the right to ask us to temporarily stop processing your personal data while, for example, you dispute its accuracy or the lawfulness of our processing.
+You have the right to object to certain types of processing of your personal data where applicable. 
+You have the right to ask us to send you, or another organisation where technically possible, a copy of all your data that we have collected structured in a machine-readable format.
+
+
+If there are any issues with the data being stored or tracked, you can contact us on the home page of our website.
+
+Your location will not be stored on any server or in any database. Your live location will be deleted right after it is sent to the other perticipants.
+Your passwords will be encrypted using standard encryption protocols before being stored in the database.
+
+
+Our providers do not store/process data outside the EEA.
+
+We do not use automated decision-making, including profiling, that produces legal effects or similarly significantly affects you.
+
+The personal information we collect, including account information and device location information, is not used to make decisions about you solely through automated processing.
+
+If you are of the opinion that we are using your data for illegal purposes, you may contact your local data-protection authority.
