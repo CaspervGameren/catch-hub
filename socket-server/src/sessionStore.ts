@@ -1,4 +1,4 @@
-import { Session, Player, PlayerRole } from "./types";
+import type { Session, Player, PlayerRole } from "./types";
 
 export const sessions: Record<string, Session> = {
   CATCH123: {
@@ -9,8 +9,12 @@ export const sessions: Record<string, Session> = {
 };
 
 export function getSession(code: string): Session | undefined {
-  if (!code) return undefined;
-  return sessions[code.toUpperCase()];
+  if (typeof code !== "string" || !code) return undefined;
+  return Object.hasOwn(sessions, code.toUpperCase()) ? sessions[code.toUpperCase()] : undefined;
+}
+
+export function findPlayerSession(socketId: string) {
+  return Object.values(sessions).find((session) => session.players.some((player) => player.id === socketId));
 }
 
 export function isUsernameTaken(session: Session, username: string): boolean {

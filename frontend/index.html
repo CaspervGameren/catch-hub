@@ -475,6 +475,21 @@
 
           <!-- GAME UI (Active State) -->
           <section id="game-ui" class="hidden mt-4 space-y-6">
+            <div class="rounded-xl border border-brand/30 bg-black/30 p-4 space-y-3">
+              <p id="game-zone-summary" class="font-mono text-sm text-brand">Wachten op spelzone</p>
+              <button id="enable-zone-audio" type="button" class="rounded-lg border border-brand/50 px-4 py-2 text-sm text-brand">Alarmgeluid inschakelen</button>
+              <p id="zone-warning" role="alert" hidden class="rounded-lg border border-red-400 bg-red-950 p-4 font-mono text-red-100"></p>
+              <div id="host-zone-controls" hidden>
+                <h3 class="mb-2 text-brand">Kies de spelzone</h3>
+                <p class="mb-3 font-text text-gray-300">Klik op twee tegenoverliggende hoeken om een rechthoek te tekenen. Sla de zone op en start daarna het spel.</p>
+                <div id="zone-editor-map" aria-label="Kies twee hoeken van de spelzone"></div>
+                <div class="mt-3 flex flex-wrap gap-3">
+                  <button id="save-game-zone" type="button" disabled class="rounded-lg border border-brand px-4 py-2 text-brand disabled:opacity-40">Zone opslaan</button>
+                  <button id="start-zone-game" type="button" disabled class="rounded-lg bg-brand px-4 py-2 text-black disabled:opacity-40">Spel starten</button>
+                </div>
+                <p id="zone-editor-status" role="status" class="mt-2 font-text text-gray-300"></p>
+              </div>
+            </div>
             <div
               class="rounded-xl bg-brand/10 border border-brand/30 p-4 text-center backdrop-blur-md"
             >

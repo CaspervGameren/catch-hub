@@ -21,9 +21,15 @@ export function initChaseVideos() {
   const container = document.getElementById("chase-video-map");
   if (!container) return;
 
-  const filmingArea = L.latLngBounds([51.9115, 4.4600], [51.9260, 4.5000]);
+  const filmingArea = L.latLngBounds([51.9100, 4.4500], [51.9300, 4.5100]);
   const map = L.map(container, {
     scrollWheelZoom: false,
+    dragging: false,
+    touchZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    zoomControl: false,
     maxBounds: filmingArea,
     maxBoundsViscosity: 1,
     maxZoom: 19,
@@ -36,7 +42,10 @@ export function initChaseVideos() {
     if (map.getZoom() < minimumZoom) map.setZoom(minimumZoom, { animate: false });
     map.panInsideBounds(filmingArea, { animate: false });
   };
-  map.on("resize", constrainViewport);
+  map.on("resize", () => {
+    map.fitBounds(L.latLngBounds(chaseVideos.map((spot) => spot.coordinates)), { padding: [45, 45] });
+    constrainViewport();
+  });
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -79,7 +88,7 @@ export function initChaseVideos() {
         iconSize: [48, 36],
         iconAnchor: [24, 18],
       }),
-    }).addTo(map).bindPopup(popup, { maxWidth: 320, className: "chase-video-leaflet-popup" });
+    }).addTo(map).bindPopup(popup, { autoPan: false, maxWidth: 320, className: "chase-video-leaflet-popup" });
     marker.on("popupclose", () => video?.pause());
   });
 

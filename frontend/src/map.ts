@@ -1,7 +1,10 @@
+import type { GameZone } from "../../shared/gameZone";
 import L from "leaflet";
 
 let map: L.Map | null = null;
 let runnerMarker: L.Marker | null = null;
+let zoneLayer: L.Rectangle | undefined;
+let activeZone: GameZone | undefined;
 let myMarker: L.Marker | null = null;
 
 // Standaard coördinaten (Nederland centrum) voor het opstarten
@@ -59,4 +62,14 @@ export function updateMapMarker(
 
   // Centreer de kaart op de nieuwe coördinaten
   map.setView(latLng, 15);
+}
+
+export function showZone(zone: GameZone | undefined) {
+  if (!zone || !map) return;
+  if (activeZone && JSON.stringify(activeZone) === JSON.stringify(zone)) return;
+  activeZone = zone;
+  zoneLayer?.remove();
+  const bounds = L.latLngBounds([zone.south, zone.west], [zone.north, zone.east]);
+  zoneLayer = L.rectangle(bounds, { color: "#2dd6b7", weight: 3, fillOpacity: 0.12 }).addTo(map);
+  map.fitBounds(bounds, { padding: [25, 25] });
 }

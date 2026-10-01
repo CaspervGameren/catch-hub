@@ -1,6 +1,7 @@
 import { getElement } from "./ui";
 
 let isTrackingActive = false;
+let watchId: number | undefined;
 
 export function startGpsTracking(
   onLocationUpdate: (coords: { latitude: number; longitude: number }) => void,
@@ -17,7 +18,7 @@ export function startGpsTracking(
   if (isTrackingActive) return;
   isTrackingActive = true;
 
-  navigator.geolocation.watchPosition(
+  watchId = navigator.geolocation.watchPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
 
@@ -39,4 +40,10 @@ export function startGpsTracking(
     locationBtn.textContent = "GPS Tracking Actief";
     locationBtn.disabled = true;
   }
+}
+
+export function stopGpsTracking() {
+  if (watchId !== undefined) navigator.geolocation.clearWatch(watchId);
+  watchId = undefined;
+  isTrackingActive = false;
 }

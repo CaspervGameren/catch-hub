@@ -46,13 +46,17 @@ export function renderPlayers(players: Player[], currentSocketId?: string) {
       return `
         <li class="flex items-center justify-between p-3 rounded-xl border bg-black/20 ${borderStyle}">
           <span class="text-sm font-semibold text-[#73e6d0]">
-            ${player.isHost ? "👑 " : ""}${player.username} ${isMe ? "(Jij)" : ""}
+            ${player.isHost ? "👑 " : ""}${escapeHtml(player.username)} ${isMe ? "(Jij)" : ""}${player.zoneStatus?.exceeded ? " · Uitgeschakeld" : player.zoneStatus?.outside ? " · Buiten zone" : ""}
           </span>
           <span class="rounded-md bg-[#2DD6B7]/20 border border-[#2DD6B7]/40 px-2 py-0.5 text-xs font-bold text-[#2DD6B7] uppercase">
-            ${player.role}
+            ${escapeHtml(player.role)}
           </span>
         </li>
       `;
     })
     .join("");
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]!);
 }

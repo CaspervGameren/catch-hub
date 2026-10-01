@@ -1,3 +1,4 @@
+import { initGameZone, renderGameZone, enableZoneAlarm } from "./gameZone";
 import { initChaseVideos } from "./chaseVideos";
 import "./styles/tailwind.css";
 import "./styles/main.scss";
@@ -16,6 +17,7 @@ import {
 
 initSocketListeners();
 initChaseVideos();
+initGameZone();
 
 let userRole: "runner" | "hunter" = "runner";
 
@@ -54,6 +56,7 @@ socket.on("connect", () => {
         if (response.success && response.session) {
           showGameUi(savedUsername, savedRole);
           renderPlayers(response.session.players, socket.id);
+          renderGameZone(response.session);
           checkRunnerAndManageTimer(response.session.players);
           setupGameRoleListeners();
         } else {
@@ -72,6 +75,7 @@ getElement("#session-code")?.addEventListener("input", () => {
 
 getElement("#join-form")?.addEventListener("submit", (e: SubmitEvent) => {
   e.preventDefault();
+  void enableZoneAlarm();
 
   const submitter = (e.submitter ||
     document.activeElement) as HTMLButtonElement | null;
@@ -98,6 +102,7 @@ getElement("#join-form")?.addEventListener("submit", (e: SubmitEvent) => {
 
       showGameUi(username, userRole);
       renderPlayers(response.session.players, socket.id);
+      renderGameZone(response.session);
       checkRunnerAndManageTimer(response.session.players);
       setupGameRoleListeners();
     },
@@ -105,6 +110,7 @@ getElement("#join-form")?.addEventListener("submit", (e: SubmitEvent) => {
 });
 
 socket.on("sessionUpdate", (session) => {
+  renderGameZone(session);
   checkRunnerAndManageTimer(session.players);
 
   const hasHunter = session.players.some((p) => p.role === "hunter");
@@ -160,7 +166,7 @@ function setupGameRoleListeners() {
 function checkRunnerAndManageTimer(players: Player[]) {
   if (userRole !== "hunter") return;
 
-  const hasRunner = players.some((p) => p.role === "runner");
+  const hasRunner = players.some((p) => p.role === "runner" && !p.eliminated);
 
   if (hasRunner) {
     startHunterRadarTimer((runnerCoords) => {
