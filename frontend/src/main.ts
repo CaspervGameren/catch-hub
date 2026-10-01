@@ -18,7 +18,8 @@ initSocketListeners();
 let userRole: "runner" | "hunter" = "runner";
 
 function checkSessionRoleAvailability() {
-  const code = getElement<HTMLInputElement>("#session-code")?.value.trim() || "";
+  const code =
+    getElement<HTMLInputElement>("#session-code")?.value.trim() || "";
   if (!code) return;
 
   socket.emit("checkSessionStatus", code, (status) => {
@@ -38,7 +39,9 @@ socket.on("connect", () => {
 
   const savedUsername = localStorage.getItem("catchhub_username");
   const savedCode = localStorage.getItem("catchhub_sessionCode");
-  const savedRole = localStorage.getItem("catchhub_role") as "runner" | "hunter";
+  const savedRole = localStorage.getItem("catchhub_role") as
+    | "runner"
+    | "hunter";
 
   if (savedUsername && savedCode && savedRole) {
     userRole = savedRole;
@@ -56,7 +59,7 @@ socket.on("connect", () => {
           localStorage.removeItem("catchhub_sessionCode");
           localStorage.removeItem("catchhub_role");
         }
-      }
+      },
     );
   }
 });
@@ -101,7 +104,7 @@ getElement("#join-form")?.addEventListener("submit", (e: SubmitEvent) => {
 
 socket.on("sessionUpdate", (session) => {
   checkRunnerAndManageTimer(session.players);
-  
+
   const hasHunter = session.players.some((p) => p.role === "hunter");
   const runnerBtn = getElement("#btn-join-runner");
   if (runnerBtn) {
