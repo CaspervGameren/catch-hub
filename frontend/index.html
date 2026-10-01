@@ -1,124 +1,348 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catch Hub</title>
-    <link rel="stylesheet" href="src/styles/main.scss" />
-    <link rel="shortcut icon" href="/assets/favicon.svg" type="image/x-icon" />
-    <!-- Leaflet CSS voor OpenStreetMap -->
+    <title>Catch Hub // Tactical Cyber Uplink</title>
+
+    <!-- Google Fonts & FontAwesome / Iconify -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- Leaflet CSS for OpenStreetMap -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                DEFAULT: "#2DD6B7",
+                neon: "#00ffcc",
+                pink: "#ff007f",
+                teal: "#14b8a6",
+                dark: "#050a12",
+                glass: "rgba(15, 23, 42, 0.65)",
+              },
+            },
+            fontFamily: {
+              heading: ["Orbitron", "sans-serif"],
+              sans: ["Rajdhani", "sans-serif"],
+              mono: ["Share Tech Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Pure CSS Dynamic Animations & Custom Styling */
+      :root {
+        --neon-brand: #2dd6b7;
+        --neon-pink: #ff007f;
+      }
+
+      body {
+        background-color: #040810;
+        color: #e2e8f0;
+        font-family: "Rajdhani", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* Cyber grid background movement - Pure CSS */
+      .bg-cyber-grid {
+        background-size: 50px 50px;
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(45, 214, 183, 0.07) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(45, 214, 183, 0.07) 1px,
+            transparent 1px
+          );
+        animation: scrollGrid 18s linear infinite;
+      }
+
+      @keyframes scrollGrid {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 50px 50px;
+        }
+      }
+
+      /* Animated Glowing Floating Background Orbs - Pure CSS */
+      .orb-1 {
+        animation: floatOrbOne 14s ease-in-out infinite alternate;
+      }
+      .orb-2 {
+        animation: floatOrbTwo 18s ease-in-out infinite alternate;
+      }
+      .orb-3 {
+        animation: floatOrbThree 22s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatOrbOne {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.4;
+        }
+        50% {
+          transform: translate(80px, -60px) scale(1.15);
+          opacity: 0.6;
+        }
+        100% {
+          transform: translate(-40px, 90px) scale(0.9);
+          opacity: 0.4;
+        }
+      }
+
+      @keyframes floatOrbTwo {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translate(-90px, 50px) scale(1.2);
+          opacity: 0.5;
+        }
+        100% {
+          transform: translate(50px, -80px) scale(0.95);
+          opacity: 0.3;
+        }
+      }
+
+      @keyframes floatOrbThree {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.25;
+        }
+        50% {
+          transform: translate(60px, 70px) scale(1.1);
+          opacity: 0.45;
+        }
+        100% {
+          transform: translate(-70px, -40px) scale(0.85);
+          opacity: 0.25;
+        }
+      }
+
+      /* Pure CSS Entrance Animations with Stagger */
+      .fade-in-up {
+        opacity: 0;
+        animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Advanced Glassmorphism Styling */
+      .glass-card {
+        background: rgba(10, 17, 28, 0.72);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(45, 214, 183, 0.3);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.8),
+          0 0 30px rgba(45, 214, 183, 0.12);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .glass-card:hover {
+        border-color: rgba(45, 214, 183, 0.6);
+        box-shadow:
+          0 25px 60px rgba(0, 0, 0, 0.85),
+          0 0 45px rgba(45, 214, 183, 0.22);
+      }
+
+      /* Pure CSS Shimmer Animation */
+      @keyframes shimmer {
+        100% {
+          transform: translateX(200%);
+        }
+      }
+      .animate-shimmer {
+        animation: shimmer 2s infinite;
+      }
+
+      /* Radar Map Scanline Animation */
+      @keyframes scanline {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(1000%);
+        }
+      }
+      .animate-scanline {
+        animation: scanline 5s linear infinite;
+      }
+
+      .animate-spin-slow {
+        animation: spin 9s linear infinite;
+      }
+
+      /* Custom Cyber Glow Text */
+      .text-neon-cyan {
+        color: #2dd6b7;
+        text-shadow:
+          0 0 12px rgba(45, 214, 183, 0.7),
+          0 0 25px rgba(45, 214, 183, 0.3);
+      }
+
+      /* Custom Cyber Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #040810;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(45, 214, 183, 0.3);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(45, 214, 183, 0.7);
+      }
+    </style>
   </head>
 
   <body
-    class="bg-[#090e14] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0d1f22] via-[#090e14] to-black font-sans antialiased text-gray-200 min-h-screen selection:bg-brand selection:text-black overflow-x-hidden"
+    class="selection:bg-brand selection:text-black min-h-screen relative overflow-x-hidden"
   >
-    <!-- DYNAMIC BACKGROUND -->
+    <!-- DYNAMIC BACKGROUND WITH AMBIENT ANIMATED ORBS AND GRID -->
     <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <!-- Animated Grid -->
+      <!-- Animated Moving Cyber Grid -->
       <div
-        class="absolute inset-0 bg-[linear-gradient(to_right,#2DD6B710_1px,transparent_1px),linear-gradient(to_bottom,#2DD6B710_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] animate-[scrollGrid_20s_linear_infinite]"
+        class="absolute inset-0 bg-cyber-grid [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,#000_75%,transparent_100%)]"
       ></div>
 
-      <!-- Floating Glowing Orbs -->
+      <!-- Pure CSS Ambient Floating Glowing Orbs -->
       <div
-        class="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-brand/10 blur-[100px] animate-[floatOrb_12s_ease-in-out_infinite]"
+        class="orb-1 absolute -top-40 -left-40 h-[600px] w-[600px] rounded-full bg-brand/20 blur-[130px]"
       ></div>
       <div
-        class="absolute top-1/2 right-10 h-[300px] w-[300px] rounded-full bg-brand/5 blur-[80px] animate-[floatOrb_15s_ease-in-out_infinite_reverse]"
+        class="orb-2 absolute top-1/3 -right-40 h-[500px] w-[500px] rounded-full bg-teal-500/15 blur-[120px]"
       ></div>
       <div
-        class="absolute -bottom-40 left-1/3 h-[400px] w-[400px] rounded-full bg-[#185b54]/20 blur-[120px] animate-[floatOrb_18s_ease-in-out_infinite]"
+        class="orb-3 absolute -bottom-40 left-1/4 h-[650px] w-[650px] rounded-full bg-brand/10 blur-[150px]"
+      ></div>
+
+      <!-- Scanline Background Texture -->
+      <div
+        class="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.35)_51%)] bg-[size:100%_4px] opacity-30"
       ></div>
     </div>
 
     <!-- NAVIGATIE -->
     <nav
-      class="sticky top-0 z-50 flex items-center justify-between border-b border-brand/20 bg-[#090e14]/70 px-8 py-4 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+      class="sticky top-0 z-50 flex items-center justify-between border-b border-brand/25 bg-[#050a12]/80 px-6 lg:px-12 py-4 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
     >
       <a href="/" class="flex items-center gap-3 group">
-        <div class="relative">
+        <div
+          class="relative flex items-center justify-center w-10 h-10 rounded-lg bg-brand/10 border border-brand/40 group-hover:border-brand transition duration-500 shadow-[0_0_15px_rgba(45,214,183,0.3)]"
+        >
+          <iconify-icon
+            icon="mdi:radar"
+            class="text-2xl text-brand group-hover:rotate-180 transition-transform duration-700"
+          ></iconify-icon>
           <div
-            class="absolute inset-0 rounded-full bg-brand blur-md opacity-40 group-hover:opacity-80 transition duration-500"
+            class="absolute inset-0 rounded-lg bg-brand/20 blur-md opacity-0 group-hover:opacity-100 transition duration-500"
           ></div>
-          <img
-            src="/assets/icon.svg"
-            alt="Catch Hub"
-            class="relative z-10 block h-10 w-auto"
-          />
         </div>
         <span
-          class="font-heading text-2xl tracking-widest text-white uppercase drop-shadow-[0_0_8px_rgba(45,214,183,0.8)]"
-          >Catch<span class="text-brand">Hub</span></span
+          class="font-heading text-2xl tracking-widest text-white uppercase drop-shadow-[0_0_10px_rgba(45,214,183,0.6)]"
         >
+          Catch<span class="text-brand">Hub</span>
+        </span>
       </a>
 
       <a
         href="/signup/"
-        class="group relative inline-flex items-center justify-center gap-1.5 overflow-hidden rounded-md border border-brand/50 bg-brand/10 px-4 py-2.5 font-heading text-sm tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.6)]"
+        class="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-brand/60 bg-brand/10 px-5 py-2.5 font-heading text-sm font-bold tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.7)] active:scale-95"
       >
         <span
-          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"
+          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
         ></span>
         <iconify-icon
           icon="mdi:account-plus-outline"
-          class="text-base"
+          class="text-lg"
         ></iconify-icon>
         <span>LOGIN</span>
       </a>
     </nav>
 
-    <!-- HERO HEADER -->
+    <!-- HERO HEADER (Simplified & Cleaned: Badges Removed) -->
     <header
-      class="relative z-10 mx-auto flex min-h-[50dvh] w-full max-w-6xl flex-col items-center justify-center px-6 pt-12 text-center"
+      class="relative z-10 mx-auto flex flex-col items-center justify-center max-w-4xl px-6 pt-16 pb-12 text-center"
     >
-      <div
-        class="animate-fade-in-up mb-4 inline-flex items-center gap-2 rounded-sm border border-brand/40 bg-brand/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-brand shadow-[0_0_10px_rgba(45,214,183,0.1)]"
-      >
-        <span class="relative flex h-2 w-2">
-          <span
-            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75"
-          ></span>
-          <span
-            class="relative inline-flex h-2 w-2 rounded-full bg-brand"
-          ></span>
-        </span>
-        SYSTEM_ONLINE // SEASON 2026
-      </div>
-
       <h1
-        class="font-heading mb-6 text-5xl md:text-7xl font-black uppercase leading-none tracking-tighter text-white drop-shadow-lg"
+        class="fade-in-up font-heading mb-6 text-6xl sm:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tight text-white drop-shadow-2xl"
       >
         Hunt or be <br />
         <span
-          class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-teal-200 drop-shadow-[0_0_15px_rgba(45,214,183,0.5)]"
-          >Hunted</span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-brand via-teal-200 to-brand-neon text-neon-cyan"
         >
+          Hunted
+        </span>
       </h1>
 
       <p
-        class="mb-10 max-w-2xl text-lg font-light leading-relaxed text-gray-400"
+        class="fade-in-up delay-100 max-w-2xl text-lg sm:text-xl font-light leading-relaxed text-gray-300 font-sans"
       >
         Initiate your session. Track targets on live radar. Secure your
         perimeter.
       </p>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT CONTAINER (Expanded Card Widths: max-w-4xl / max-w-5xl) -->
     <main
-      class="relative z-10 flex flex-col items-center justify-center gap-16 px-6 pb-24"
+      class="relative z-10 mx-auto flex flex-col items-center justify-center gap-14 px-4 sm:px-6 pb-24 w-full max-w-5xl"
     >
-      <!-- GAME UI PANEL -->
-      <div class="w-full max-w-2xl">
+      <!-- GAME UI PANEL (Wider Card Width) -->
+      <div class="fade-in-up delay-200 w-full">
         <section
-          class="group relative w-full overflow-hidden rounded-xl border border-brand/30 bg-[#11181f]/80 p-8 backdrop-blur-xl shadow-[0_0_30px_rgba(45,214,183,0.1)] transition-all hover:border-brand/60 hover:shadow-[0_0_40px_rgba(45,214,183,0.15)]"
+          class="glass-card group relative w-full rounded-2xl p-6 sm:p-10 relative overflow-hidden"
         >
-          <!-- Decorative Corners -->
+          <!-- Cyber Corner Accent Markers -->
           <div
             class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"
           ></div>
@@ -133,35 +357,39 @@
           ></div>
 
           <header
-            class="mb-10 flex flex-col items-center border-b border-white/10 pb-6"
+            class="mb-10 flex flex-col items-center border-b border-brand/20 pb-6"
           >
             <h2
-              class="font-heading text-4xl uppercase tracking-widest text-brand drop-shadow-[0_0_10px_rgba(45,214,183,0.4)]"
+              class="font-heading text-3xl sm:text-4xl uppercase tracking-widest text-white text-neon-cyan font-black"
             >
               Lobby Uplink
             </h2>
             <div class="mt-3 flex items-center gap-2">
-              <span
-                class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand"
-              ></span>
+              <span class="h-2 w-2 animate-ping rounded-full bg-brand"></span>
               <p
                 id="socket-status"
-                class="font-mono text-xs uppercase tracking-widest text-brand/80"
+                class="font-mono text-xs uppercase tracking-widest text-brand"
               >
                 Establishing connection...
               </p>
             </div>
           </header>
 
-          <!-- FORMULIER -->
+          <!-- FORMULIER (Grid Layout for Optimized Input Widths) -->
           <section id="join-section">
             <form id="join-form" class="space-y-8">
-              <div class="space-y-5">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Callsign Input -->
                 <label class="block group/input">
                   <span
-                    class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors"
-                    >Callsign (Name)</span
+                    class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors flex items-center gap-1.5"
                   >
+                    <iconify-icon
+                      icon="mdi:account-badge-outline"
+                      class="text-brand text-sm"
+                    ></iconify-icon>
+                    Callsign (Name)
+                  </span>
                   <div class="relative">
                     <input
                       type="text"
@@ -169,19 +397,25 @@
                       name="playerName"
                       required
                       placeholder="Enter CallSign"
-                      class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"
+                      class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
                     />
                     <div
-                      class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"
+                      class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
                     ></div>
                   </div>
                 </label>
 
+                <!-- Session ID Input -->
                 <label class="block group/input">
                   <span
-                    class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors"
-                    >Session ID</span
+                    class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors flex items-center gap-1.5"
                   >
+                    <iconify-icon
+                      icon="mdi:key-wireless"
+                      class="text-brand text-sm"
+                    ></iconify-icon>
+                    Session ID
+                  </span>
                   <div class="relative">
                     <input
                       type="text"
@@ -190,27 +424,28 @@
                       required
                       value="CATCH123"
                       placeholder="XXXXXX"
-                      class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white uppercase outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"
+                      class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white uppercase outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
                     />
                     <div
-                      class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"
+                      class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
                     ></div>
                   </div>
                 </label>
               </div>
 
+              <!-- Role Selector Buttons -->
               <fieldset class="block pt-2">
                 <legend
-                  class="mb-3 font-mono text-xs uppercase tracking-[0.1em] text-gray-400 text-center w-full"
+                  class="mb-4 font-mono text-xs uppercase tracking-widest text-gray-400 text-center w-full"
                 >
                   Select Operational Role
                 </legend>
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <button
                     type="submit"
                     data-role="runner"
                     id="btn-join-runner"
-                    class="hidden relative flex-1 overflow-hidden rounded-sm border border-brand bg-brand/10 py-4 font-heading text-lg tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.4)] active:scale-[0.98]"
+                    class="hidden relative flex-1 overflow-hidden rounded-lg border border-brand/60 bg-brand/10 py-4 font-heading font-bold text-base tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.6)] active:scale-95"
                   >
                     JOIN AS RUNNER
                   </button>
@@ -218,7 +453,7 @@
                     type="submit"
                     data-role="hunter"
                     id="btn-join-hunter"
-                    class="relative flex-1 overflow-hidden rounded-sm border border-brand bg-brand/10 py-4 font-heading text-lg tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.4)] active:scale-[0.98]"
+                    class="relative flex-1 overflow-hidden rounded-lg border border-brand/60 bg-brand/10 py-4 font-heading font-bold text-base tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.6)] active:scale-95"
                   >
                     JOIN AS HUNTER
                   </button>
@@ -227,66 +462,75 @@
             </form>
           </section>
 
-          <!-- GAME UI -->
-          <section id="game-ui" class="hidden mt-4 animate-fade-in">
+          <!-- GAME UI (Active State) -->
+          <section id="game-ui" class="hidden mt-4 space-y-6">
             <div
-              class="mb-6 rounded-md bg-brand/10 border border-brand/20 p-4 text-center"
+              class="rounded-xl bg-brand/10 border border-brand/30 p-4 text-center backdrop-blur-md"
             >
               <h2
                 id="role-display"
-                class="font-heading text-3xl tracking-widest text-brand drop-shadow-[0_0_8px_rgba(45,214,183,0.5)] uppercase"
+                class="font-heading text-3xl tracking-widest text-brand text-neon-cyan uppercase font-black"
               ></h2>
             </div>
 
-            <button
-              id="leave-session"
-              class="mb-8 w-full rounded-sm border border-red-500/40 bg-red-500/10 py-2.5 font-mono text-xs uppercase tracking-widest text-red-400 transition hover:bg-red-500/20 hover:text-red-300 active:scale-[0.99]"
-            >
-              [ Terminate Session ]
-            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button
+                id="share-location"
+                class="relative overflow-hidden rounded-lg border border-brand bg-brand/20 py-4 font-heading text-lg font-bold tracking-wider text-white transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.6)] active:scale-95 flex items-center justify-center gap-2"
+              >
+                <span
+                  class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-shimmer"
+                ></span>
+                <iconify-icon
+                  icon="mdi:crosshair-gps"
+                  class="text-xl"
+                ></iconify-icon>
+                <span>INITIATE GPS UPLINK</span>
+              </button>
 
-            <button
-              id="share-location"
-              class="relative w-full overflow-hidden rounded-sm border border-brand bg-brand/20 py-4 font-heading text-xl tracking-wider text-white transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.5)] active:scale-[0.98]"
-            >
-              <span
-                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent hover:animate-[shimmer_1.5s_infinite]"
-              ></span>
-              INITIATE GPS UPLINK
-            </button>
+              <button
+                id="leave-session"
+                class="rounded-lg border border-red-500/40 bg-red-500/10 py-4 font-mono text-xs uppercase tracking-widest text-red-400 transition duration-300 hover:bg-red-500 hover:text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.5)] active:scale-95 flex items-center justify-center gap-2"
+              >
+                <iconify-icon icon="mdi:power" class="text-base"></iconify-icon>
+                <span>TERMINATE SESSION</span>
+              </button>
+            </div>
 
             <!-- EIGEN LOCATIE EN COÖRDINATEN -->
             <div
               id="location-info"
-              class="mt-6 rounded-sm border border-white/10 bg-black/50 p-4 text-center relative overflow-hidden"
+              class="rounded-lg border border-brand/30 bg-black/60 p-5 text-center relative overflow-hidden backdrop-blur-md"
             >
-              <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand/50"></div>
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-brand"></div>
               <p id="location" class="font-mono text-sm text-gray-300">
                 Awaiting coordinates...
               </p>
-              <p id="coordinates" class="mt-2 font-mono text-xs text-brand/70">
+              <p
+                id="coordinates"
+                class="mt-2 font-mono text-xs text-brand tracking-widest"
+              >
                 LAT: -- | LNG: --
               </p>
             </div>
 
             <!-- OPENSTREETMAP CONTAINER -->
-            <div class="mt-8 relative">
+            <div
+              class="relative rounded-xl overflow-hidden border border-brand/40 shadow-2xl"
+            >
               <div
-                class="absolute -top-3 left-4 bg-[#11181f] px-2 font-mono text-xs uppercase tracking-[0.2em] text-brand z-10 border border-brand/30 rounded-sm"
+                class="absolute top-3 left-4 bg-black/80 backdrop-blur-md px-3 py-1 font-mono text-xs uppercase tracking-widest text-brand z-[500] border border-brand/40 rounded-md"
               >
-                Tactical Map
+                TACTICAL RADAR STREAM
               </div>
-              <div
-                id="map"
-                class="h-72 w-full rounded-sm border border-brand/30 bg-[#0a0f14] z-0"
-              ></div>
+              <div id="map" class="h-80 w-full z-0 bg-[#0a0f14]"></div>
 
-              <!-- Map scanline effect (pointer events none so it doesn't block map interaction) -->
+              <!-- Map Scanline effect -->
               <div
-                class="pointer-events-none absolute inset-0 z-[400] overflow-hidden rounded-sm mix-blend-overlay opacity-30"
+                class="pointer-events-none absolute inset-0 z-[400] overflow-hidden mix-blend-overlay opacity-30"
               >
                 <div
-                  class="h-1 w-full bg-brand shadow-[0_0_10px_#2DD6B7] animate-[scanline_4s_linear_infinite]"
+                  class="h-1 w-full bg-brand shadow-[0_0_10px_#2DD6B7] animate-scanline"
                 ></div>
               </div>
             </div>
@@ -294,26 +538,26 @@
             <!-- RUNNER LOCATIE RADAR (HUNTERS ONLY) -->
             <div
               id="runner-radar-box"
-              class="mt-8 hidden rounded-sm border border-brand/50 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand/20 to-transparent p-5 relative overflow-hidden"
+              class="hidden rounded-xl border border-brand/50 bg-gradient-to-r from-brand/20 via-black/80 to-transparent p-6 relative overflow-hidden"
             >
-              <div class="absolute top-0 right-0 p-2 opacity-20">
+              <div class="absolute top-0 right-0 p-3 opacity-20">
                 <iconify-icon
                   icon="mdi:radar"
-                  class="text-6xl animate-spin-slow text-brand"
+                  class="text-7xl animate-spin-slow text-brand"
                 ></iconify-icon>
               </div>
 
               <div
-                class="relative z-10 flex items-center justify-between border-b border-brand/20 pb-3"
+                class="relative z-10 flex items-center justify-between border-b border-brand/20 pb-4"
               >
                 <h3
-                  class="font-heading tracking-widest text-lg text-brand drop-shadow-[0_0_5px_rgba(45,214,183,0.5)]"
+                  class="font-heading tracking-widest text-lg text-brand text-neon-cyan font-bold"
                 >
                   TARGET RADAR
                 </h3>
                 <span
                   id="radar-timer"
-                  class="rounded-sm bg-black/60 px-3 py-1 font-mono text-[10px] uppercase text-brand border border-brand/30"
+                  class="rounded-md bg-black/80 px-3 py-1 font-mono text-xs uppercase text-brand border border-brand/30"
                 >
                   SCANNING...
                 </span>
@@ -321,38 +565,41 @@
 
               <p
                 id="runner-coordinates"
-                class="relative z-10 mt-4 font-mono text-xs tracking-wider text-gray-300"
+                class="relative z-10 mt-4 font-mono text-sm tracking-wider text-gray-300"
               >
                 LKP (Last Known Position):
-                <span class="text-brand">UNKNOWN</span>
+                <span class="text-brand font-bold">UNKNOWN</span>
               </p>
 
               <button
                 id="btn-pulse-now"
                 type="button"
-                class="relative z-10 mt-5 w-full rounded-sm border border-brand/60 bg-brand/10 py-3 font-mono text-xs font-bold uppercase tracking-widest text-brand transition hover:bg-brand hover:text-black hover:shadow-[0_0_15px_rgba(45,214,183,0.4)] active:scale-[0.98]"
+                class="relative z-10 mt-5 w-full rounded-md border border-brand/60 bg-brand/10 py-3.5 font-mono text-xs font-bold uppercase tracking-widest text-brand transition duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.5)] active:scale-95 flex items-center justify-center gap-2"
               >
-                ⚡ MANUAL PULSE
+                <iconify-icon
+                  icon="mdi:lightning-bolt"
+                  class="text-base"
+                ></iconify-icon>
+                <span>MANUAL PULSE</span>
               </button>
             </div>
 
             <!-- SPELERSLIJST -->
-            <div class="mt-10 border-t border-white/10 pt-8">
-              <div class="flex items-center justify-between mb-5">
+            <div class="border-t border-brand/20 pt-6">
+              <div class="flex items-center justify-between mb-4">
                 <h3
-                  class="font-mono text-xs uppercase tracking-[0.1em] text-gray-400"
+                  class="font-mono text-xs uppercase tracking-widest text-gray-400"
                 >
                   Squad Members
                 </h3>
                 <span
-                  class="font-mono text-xs text-brand border border-brand/30 px-2 py-0.5 rounded-sm bg-brand/5"
-                  >ID:
-                  <span id="session-code-display" class="font-bold"
-                    >----</span
-                  ></span
+                  class="font-mono text-xs text-brand border border-brand/30 px-3 py-1 rounded-md bg-brand/10"
                 >
+                  ID:
+                  <span id="session-code-display" class="font-bold">----</span>
+                </span>
               </div>
-              <ul id="players-list" class="flex flex-col gap-2">
+              <ul id="players-list" class="space-y-2 font-mono text-sm">
                 <!-- Dynamisch ingeladen -->
               </ul>
             </div>
@@ -360,13 +607,13 @@
         </section>
       </div>
 
-      <!-- CONTACT FORM -->
-      <div data-contact-reveal class="w-full max-w-2xl mt-8">
+      <!-- CONTACT FORM CARD (Matching Wider Width & Grid Form) -->
+      <div data-contact-reveal class="fade-in-up delay-300 w-full">
         <section
           data-contact-card
-          class="group relative w-full overflow-hidden rounded-xl border border-brand/30 bg-[#11181f]/80 p-8 backdrop-blur-xl shadow-[0_0_30px_rgba(45,214,183,0.1)] transition-all hover:border-brand/60 hover:shadow-[0_0_40px_rgba(45,214,183,0.15)]"
+          class="glass-card group relative w-full rounded-2xl p-6 sm:p-10 relative overflow-hidden"
         >
-          <!-- Decorative Corners -->
+          <!-- Cyber Corner Accent Markers -->
           <div
             class="absolute top-0 left-0 h-4 w-4 border-t-2 border-l-2 border-brand"
           ></div>
@@ -381,15 +628,15 @@
           ></div>
 
           <header
-            class="mb-10 flex flex-col items-center border-b border-white/10 pb-6"
+            class="mb-10 flex flex-col items-center border-b border-brand/20 pb-6"
           >
             <h2
-              class="font-heading text-4xl uppercase tracking-widest text-brand drop-shadow-[0_0_10px_rgba(45,214,183,0.4)]"
+              class="font-heading text-3xl sm:text-4xl uppercase tracking-widest text-white text-neon-cyan font-black"
             >
               Comms Channel
             </h2>
             <p
-              class="mt-3 font-mono text-xs uppercase tracking-widest text-brand/80"
+              class="mt-2 font-mono text-xs uppercase tracking-widest text-brand/80"
             >
               Secure Transmission Link
             </p>
@@ -406,131 +653,124 @@
               value="e47dcbf8-3f36-42a9-a9f7-5f482c9090cc"
             />
 
-            <div class="space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <label class="block group/input">
                 <span
-                  class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors"
-                  >Agent Name</span
+                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
                 >
+                  Agent Name
+                </span>
                 <div class="relative">
                   <input
                     type="text"
                     name="name"
                     required
                     placeholder="Enter Name"
-                    class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"
+                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
                   />
                   <div
-                    class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"
+                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
                   ></div>
                 </div>
               </label>
 
               <label class="block group/input">
                 <span
-                  class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors"
-                  >Email Coordinates</span
+                  class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
                 >
+                  Email Coordinates
+                </span>
                 <div class="relative">
                   <input
                     type="email"
                     name="email"
                     required
                     placeholder="Enter Email"
-                    class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"
+                    class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
                   />
                   <div
-                    class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"
-                  ></div>
-                </div>
-              </label>
-
-              <label class="block group/input">
-                <span
-                  class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors"
-                  >Transmission Type</span
-                >
-                <div class="relative">
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Enter Subject"
-                    class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"
-                  />
-                  <div
-                    class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"
-                  ></div>
-                </div>
-              </label>
-
-              <label class="block group/input">
-                <span
-                  class="mb-1.5 block font-mono text-xs uppercase tracking-[0.1em] text-gray-400 group-focus-within/input:text-brand transition-colors"
-                  >Message Payload</span
-                >
-                <div class="relative">
-                  <textarea
-                    name="message"
-                    rows="5"
-                    required
-                    placeholder="Enter Data..."
-                    class="peer w-full rounded-sm border border-white/10 bg-black/40 px-4 py-3 font-mono text-white outline-none transition-all placeholder:text-gray-600 focus:border-brand focus:bg-brand/5 focus:shadow-[0_0_15px_rgba(45,214,183,0.2)]"
-                  ></textarea>
-                  <div
-                    class="absolute right-0 bottom-0 h-1 w-0 bg-brand transition-all duration-300 peer-focus:w-full"
+                    class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
                   ></div>
                 </div>
               </label>
             </div>
 
+            <label class="block group/input">
+              <span
+                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+              >
+                Transmission Type
+              </span>
+              <div class="relative">
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Enter Subject"
+                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                />
+                <div
+                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                ></div>
+              </div>
+            </label>
+
+            <label class="block group/input">
+              <span
+                class="mb-2 block font-mono text-xs uppercase tracking-wider text-gray-300 group-focus-within/input:text-brand transition-colors"
+              >
+                Message Payload
+              </span>
+              <div class="relative">
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Enter Data..."
+                  class="peer w-full rounded-lg border border-brand/30 bg-black/60 px-4 py-3.5 font-mono text-white outline-none transition-all duration-300 placeholder:text-gray-600 focus:border-brand focus:bg-brand/10 focus:shadow-[0_0_20px_rgba(45,214,183,0.3)]"
+                ></textarea>
+                <div
+                  class="absolute right-0 bottom-0 h-0.5 w-0 bg-brand transition-all duration-500 peer-focus:w-full"
+                ></div>
+              </div>
+            </label>
+
             <button
               type="submit"
-              class="relative mt-4 w-full overflow-hidden rounded-sm border border-brand bg-brand/10 py-4 font-heading text-lg tracking-wider text-brand transition-all hover:bg-brand hover:text-black hover:shadow-[0_0_20px_rgba(45,214,183,0.4)] active:scale-[0.98]"
+              class="relative w-full overflow-hidden rounded-lg border border-brand bg-brand/20 py-4 font-heading font-bold text-lg tracking-wider text-white transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_30px_rgba(45,214,183,0.7)] active:scale-95 flex items-center justify-center gap-2"
             >
               <span
-                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent hover:animate-[shimmer_1.5s_infinite]"
+                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-shimmer"
               ></span>
-              SEND TRANSMISSION
+              <iconify-icon
+                icon="mdi:send-lock-outline"
+                class="text-xl"
+              ></iconify-icon>
+              <span>SEND TRANSMISSION</span>
             </button>
           </form>
         </section>
       </div>
     </main>
 
-    <script type="module" src="/src/main.ts"></script>
+    <!-- FOOTER -->
+    <footer
+      class="relative z-10 border-t border-brand/20 bg-[#040810] py-8 font-mono text-xs text-gray-500"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div>© CATCH HUB TERMINAL // ALL RIGHTS RESERVED</div>
+        <div class="flex items-center gap-4 text-brand">
+          <a href="#" class="hover:underline">PROTOCOL</a>
+          <span>•</span>
+          <a href="#" class="hover:underline">PRIVACY MAP</a>
+          <span>•</span>
+          <a href="#" class="hover:underline">TELEMETRY</a>
+        </div>
+      </div>
+    </footer>
 
-    <style>
-      @keyframes scanline {
-        0% {
-          transform: translateY(-100%);
-        }
-        100% {
-          transform: translateY(72rem);
-        }
-      }
-      @keyframes scrollGrid {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(40px);
-        } /* matches background size */
-      }
-      @keyframes floatOrb {
-        0%,
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-        33% {
-          transform: translate(30px, -50px) scale(1.1);
-        }
-        66% {
-          transform: translate(-20px, 20px) scale(0.9);
-        }
-      }
-      .animate-spin-slow {
-        animation: spin 8s linear infinite;
-      }
-    </style>
+    <!-- JS MODULE IMPORT (Preserved original reference) -->
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
