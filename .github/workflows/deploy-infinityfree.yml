@@ -1,0 +1,53 @@
+name: Deploy website to InfinityFree
+on:
+  push:
+    branches: [deployment]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: infinityfree-deployment
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/deployment'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check required configuration
+        env:
+          VITE_SOCKET_URL: ${{ vars.VITE_SOCKET_URL }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ vars.FTP_SERVER_DIR }}
+        run: |
+          for key in VITE_SOCKET_URL FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
+            if [ -z "${!key}" ]; then echo "Missing configuration: $key"; exit 1; fi
+          done
+          node -e 'const u=new URL(process.env.VITE_SOCKET_URL); if(u.protocol!=="https:") throw Error("Socket URL must use HTTPS");'
+      - name: Build website
+        env:
+          VITE_SOCKET_URL: ${{ vars.VITE_SOCKET_URL }}
+        run: |
+          corepack enable
+          corepack prepare pnpm@12.5.1 --activate
+          pnpm --dir frontend install --frozen-lockfile
+          pnpm --dir frontend build
+      - name: Upload built website
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./frontend/dist/
+          server-dir: ${{ vars.FTP_SERVER_DIR }}
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/*.md

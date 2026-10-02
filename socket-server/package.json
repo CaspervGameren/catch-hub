@@ -7,7 +7,8 @@
     "dev": "tsx src/index.ts",
     "check": "tsc --noEmit",
     "test": "tsx --test src/gameZone.test.ts",
-    "test:integration": "node tests/integration.mjs"
+    "test:integration": "node tests/integration.mjs",
+    "start": "tsx src/index.ts"
   },
   "keywords": [],
   "author": "",

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 const server = spawn(process.execPath, ['--import', 'tsx', 'src/index.ts'], {
- cwd: fileURLToPath(new URL('../', import.meta.url)), env: { ...process.env, PORT: '3012' }, stdio: ['ignore', 'pipe', 'pipe'],
+ cwd: fileURLToPath(new URL('../', import.meta.url)), env: { ...process.env, PORT: '3012', NODE_ENV: 'production', ALLOWED_ORIGINS: 'https://catchhub.test' }, stdio: ['ignore', 'pipe', 'pipe'],
 });
 const ready = new Promise((resolve, reject) => {
  const timeout = setTimeout(() => reject(Error('Server startup timed out')), 10000);
@@ -11,11 +11,14 @@ const ready = new Promise((resolve, reject) => {
  server.once('exit', (code) => { clearTimeout(timeout); reject(Error('Server exited: '+code)); });
 });
 const sockets=[];
-async function connect(){ const s=io('http://127.0.0.1:3012',{transports:['websocket'],reconnection:false});sockets.push(s);await new Promise((r,j)=>{s.once('connect',r);s.once('connect_error',j)});return s; }
+async function connect(){ const s=io('http://127.0.0.1:3012',{transports:['websocket'],reconnection:false,extraHeaders:{Origin:'https://catchhub.test'}});sockets.push(s);await new Promise((r,j)=>{s.once('connect',r);s.once('connect_error',j)});return s; }
 function emit(s,event,...args){return new Promise((r,j)=>s.timeout(2000).emit(event,...args,(e,data)=>e?j(e):r(data)));}
 function event(s,name){return new Promise((r,j)=>{const t=setTimeout(()=>j(Error('No '+name)),12000);s.once(name,x=>{clearTimeout(t);r(x)});});}
 try {
  await ready;
+ assert.deepEqual(await (await fetch('http://127.0.0.1:3012/health')).json(),{status:'ok'});
+ const denied=io('http://127.0.0.1:3012',{transports:['websocket'],reconnection:false,extraHeaders:{Origin:'https://other.test'}});sockets.push(denied);
+ await new Promise((resolve,reject)=>{denied.once('connect',()=>reject(Error('Forbidden origin connected')));denied.once('connect_error',resolve);});denied.disconnect();
  const code='TEST-'+Date.now();
  const host=await connect(),other=await connect();let runner=await connect();
  assert.equal((await emit(host,'joinSession',{code,username:'host',role:'hunter'})).success,true);
