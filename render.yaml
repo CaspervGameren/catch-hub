@@ -4,8 +4,8 @@ services:
     runtime: node
     plan: free
     branch: deployment
-    buildCommand: corepack enable && corepack prepare pnpm@12.5.1 --activate && pnpm --dir socket-server install --frozen-lockfile --prod=false && pnpm --dir socket-server check
-    startCommand: pnpm --dir socket-server start
+    buildCommand: npx --yes pnpm@12.5.1 --dir socket-server install --frozen-lockfile --prod=false && npx --yes pnpm@12.5.1 --dir socket-server check
+    startCommand: npx --yes pnpm@12.5.1 --dir socket-server start
     healthCheckPath: /health
     envVars:
       - key: NODE_VERSION
