@@ -276,7 +276,7 @@
     <nav
       class="sticky top-0 z-50 flex items-center justify-between border-b border-brand/25 bg-[#050a12]/80 px-6 lg:px-12 py-4 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
     >
-      <a href="/" class="flex items-center gap-3 group">
+      <a href="%BASE_URL%" class="flex items-center gap-3 group">
         <div
           class="relative flex items-center justify-center w-10 h-10 rounded-lg bg-brand/10 border border-brand/40 group-hover:border-brand transition duration-500 shadow-[0_0_15px_rgba(45,214,183,0.3)]"
         >
@@ -298,7 +298,7 @@
       <div class="flex items-center gap-3 sm:gap-5">
         <a href="#contact" class="font-heading text-xs sm:text-sm text-brand transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">CONTACT</a>
       <a
-        href="/signup/"
+        aria-disabled="true" title="Accounts binnenkort beschikbaar"
         class="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md border border-brand/60 bg-brand/10 px-5 py-2.5 font-heading text-sm font-bold tracking-wider text-brand transition-all duration-300 hover:bg-brand hover:text-black hover:shadow-[0_0_25px_rgba(45,214,183,0.7)] active:scale-95"
       >
         <span
@@ -308,7 +308,7 @@
           icon="mdi:account-plus-outline"
           class="text-lg"
         ></iconify-icon>
-        <span>LOGIN</span>
+        <span>LOGIN · BINNENKORT</span>
       </a>
       </div>
     </nav>
@@ -877,9 +877,9 @@
       >
         <div>© CATCH HUB TERMINAL // ALL RIGHTS RESERVED</div>
         <div class="flex items-center gap-4 text-brand">
-          <a href="/pages/terms_and_conditions.txt" class="hover:underline">Terms and Conditions</a>
+          <a href="%BASE_URL%pages/terms_and_conditions.txt" class="hover:underline">Terms and Conditions</a>
           <span>•</span>
-          <a href="/pages/privacy_policy.txt" class="hover:underline">Privacy Policy</a>
+          <a href="%BASE_URL%pages/privacy_policy.txt" class="hover:underline">Privacy Policy</a>
           <span>•</span>
           <a href="#" class="hover:underline">TELEMETRY</a>
         </div>

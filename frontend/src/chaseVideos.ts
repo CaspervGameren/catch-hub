@@ -64,7 +64,7 @@ export function initChaseVideos() {
       video.controls = true;
       video.playsInline = true;
       video.preload = "metadata";
-      video.src = spot.src;
+      video.src = spot.src.startsWith("/") ? `${import.meta.env.BASE_URL}${spot.src.slice(1)}` : spot.src;
       video.setAttribute("aria-label", spot.title);
       popup.append(video);
       const fallback = document.createElement("p");

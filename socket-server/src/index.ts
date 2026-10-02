@@ -12,15 +12,28 @@ import {
   removePlayerFromAllSessions,
 } from "./sessionStore";
 
-const httpServer = createServer();
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://127.0.0.1:5174,http://localhost:5174,http://127.0.0.1:5173,http://localhost:5173")
+  .split(",").map((origin) => origin.trim()).filter(Boolean);
+if (process.env.NODE_ENV === "production" && !process.env.ALLOWED_ORIGINS?.trim()) {
+  throw new Error("Set ALLOWED_ORIGINS to the HTTPS website origin before deploying.");
+}
+const httpServer = createServer((request, response) => {
+  if (request.url === "/health") {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify({ status: "ok" }));
+  } else { response.writeHead(404); response.end("Not found"); }
+});
 
 const io = new Server<ToServer, ToClient>(httpServer, {
   cors: {
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: false,
   },
-  allowEIO3: true,
+  allowRequest: (request, callback) => {
+    const origin = request.headers.origin;
+    callback(null, origin ? allowedOrigins.includes(origin) : process.env.NODE_ENV !== "production");
+  },
 });
 
 io.on("connection", (socket) => {
@@ -169,6 +182,6 @@ setInterval(() => {
   }
 }, 200).unref();
 
-httpServer.listen(Number(process.env.PORT || 3000), () => {
-  console.log("Socket.IO server running on http://localhost:3000");
+httpServer.listen(Number(process.env.PORT || 3000), "0.0.0.0", () => {
+  console.log(`Socket.IO server running on port ${process.env.PORT || 3000}`);
 });
