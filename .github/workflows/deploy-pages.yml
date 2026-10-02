@@ -1,0 +1,37 @@
+name: Deploy CatchHub to GitHub Pages
+on:
+  push:
+    branches: [deployment]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/deployment'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build website
+        env:
+          VITE_BASE_PATH: /catch-hub/
+          VITE_SOCKET_URL: https://catch-hub-sockets.onrender.com
+        run: |
+          npx --yes pnpm@12.5.1 --dir frontend install --frozen-lockfile
+          npx --yes pnpm@12.5.1 --dir frontend build
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: frontend/dist
+      - uses: actions/deploy-pages@v5
+        id: deployment
